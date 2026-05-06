@@ -1,5 +1,5 @@
 function TeamCard({ equipo, accentColor = 'accent' }) {
-    const { equipo: nombre } = equipo;
+    const { equipo: nombre, escudo } = equipo;
 
     return (
         <article className="team-card">
@@ -7,6 +7,13 @@ function TeamCard({ equipo, accentColor = 'accent' }) {
 
             <div className="team-card-header">
                 <h2 className="team-card-name">{nombre}</h2>
+                {escudo && (
+                    <img
+                        src={escudo}
+                        alt={`Escudo ${nombre}`}
+                        className="team-card-shield"
+                    />
+                )}
             </div>
 
             <div className="team-card-info">

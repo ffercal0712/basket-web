@@ -38,6 +38,12 @@ function MatchCard({ partido }) {
             <div className="match-card">
                 <div className={`match-card-corner match-card-corner--top match-card-corner--${cornerColor(equipo1.id)}`}></div>
                 <div className={`match-card-corner match-card-corner--bottom match-card-corner--${cornerColor(equipo2.id)}`}></div>
+                {equipo1.escudo && (
+                    <img src={equipo1.escudo} alt={equipo1.equipo} className="match-card-shield match-card-shield--top" />
+                )}
+                {equipo2.escudo && (
+                    <img src={equipo2.escudo} alt={equipo2.equipo} className="match-card-shield match-card-shield--bottom" />
+                )}
 
                 <div className="match-card-meta">
                     <span className="match-card-date">{formatearFechaCorta(fecha)}</span>
