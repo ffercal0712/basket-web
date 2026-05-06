@@ -39,10 +39,22 @@ function MatchCard({ partido }) {
                 <div className={`match-card-corner match-card-corner--top match-card-corner--${cornerColor(equipo1.id)}`}></div>
                 <div className={`match-card-corner match-card-corner--bottom match-card-corner--${cornerColor(equipo2.id)}`}></div>
                 {equipo1.escudo && (
-                    <img src={equipo1.escudo} alt={equipo1.equipo} className="match-card-shield match-card-shield--top" />
+                    <span className={`match-card-shield-frame match-card-shield-frame--top ${equipo1.logoVariant === 'wide' ? 'match-card-shield-frame--wide' : ''}`}>
+                        <img
+                            src={equipo1.escudo}
+                            alt={equipo1.equipo}
+                            className={`match-card-shield ${equipo1.logoVariant === 'wide' ? 'match-card-shield--wide' : ''}`}
+                        />
+                    </span>
                 )}
                 {equipo2.escudo && (
-                    <img src={equipo2.escudo} alt={equipo2.equipo} className="match-card-shield match-card-shield--bottom" />
+                    <span className={`match-card-shield-frame match-card-shield-frame--bottom ${equipo2.logoVariant === 'wide' ? 'match-card-shield-frame--wide' : ''}`}>
+                        <img
+                            src={equipo2.escudo}
+                            alt={equipo2.equipo}
+                            className={`match-card-shield ${equipo2.logoVariant === 'wide' ? 'match-card-shield--wide' : ''}`}
+                        />
+                    </span>
                 )}
 
                 <div className="match-card-meta">

@@ -283,19 +283,44 @@ a:hover {
   border-bottom: 1px solid rgba(var(--oksap-soft-rgb), 0.1);
 }
 
-.team-card-shield {
-  height: 52px;
-  width: auto;
-  max-width: 64px;
-  object-fit: contain;
+.team-card-shield-frame {
+  width: 72px;
+  height: 72px;
+  padding: 0.45rem;
+  border-radius: 18px;
+  background: rgba(var(--oksap-white-rgb), 0.08);
+  border: 1px solid rgba(var(--oksap-soft-rgb), 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  opacity: 0.92;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-  transition: opacity 0.2s ease;
+  box-sizing: border-box;
+}
+
+.team-card-shield-frame--wide {
+  width: 96px;
+  height: 64px;
+  border-radius: 16px;
+}
+
+.team-card-shield {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  opacity: 0.96;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.team-card-shield--wide {
+  padding: 0.18rem;
+  box-sizing: border-box;
 }
 
 .card-link:hover .team-card-shield {
   opacity: 1;
+  transform: scale(1.02);
 }
 
 .team-card-name {
@@ -346,7 +371,7 @@ a:hover {
   background: rgba(var(--oksap-primary-soft-rgb), 0.6);
   border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 1.5rem 4.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -421,6 +446,20 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  .match-card {
+    padding: 1.25rem 4rem;
+  }
+
+  .match-card-shield-frame {
+    width: 50px;
+    height: 50px;
+  }
+
+  .match-card-shield-frame--wide {
+    width: 66px;
+    height: 44px;
+  }
+
   .cards-grid {
     grid-template-columns: 1fr;
     padding: 1rem 6vw 2rem;
@@ -491,30 +530,54 @@ a:hover {
 }
 
 /* Escudos en esquinas de match-card */
-.match-card-shield {
+.match-card-shield-frame {
   position: absolute;
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  opacity: 0.18;
+  width: 58px;
+  height: 58px;
+  padding: 0.35rem;
+  border-radius: 16px;
+  background: rgba(var(--oksap-white-rgb), 0.05);
+  border: 1px solid rgba(var(--oksap-soft-rgb), 0.08);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.22;
   transition: opacity 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  box-sizing: border-box;
 }
 
-.match-card-shield--top {
-  top: 8px;
+.match-card-shield-frame--wide {
+  width: 76px;
+  height: 50px;
+  border-radius: 14px;
+}
+
+.match-card-shield-frame--top {
+  top: 50%;
   left: 10px;
+  transform: translateY(-50%);
 }
 
-.match-card-shield--bottom {
-  bottom: 8px;
+.match-card-shield-frame--bottom {
+  top: 50%;
   right: 10px;
+  transform: translateY(-50%);
 }
 
-.card-link:hover .match-card-shield {
-  opacity: 0.28;
+.match-card-shield {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+}
+
+.match-card-shield--wide {
+  padding: 0.15rem;
+  box-sizing: border-box;
+}
+
+.card-link:hover .match-card-shield-frame {
+  opacity: 0.32;
 }
 
 /* Asegurar que el contenido va por encima de los gradientes */
@@ -1139,12 +1202,45 @@ a:hover {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
 }
 
 .match-detail-team:last-child {
   text-align: right;
   align-items: flex-end;
+}
+
+.match-detail-shield-frame {
+  width: 132px;
+  height: 132px;
+  padding: 0.9rem;
+  border-radius: 28px;
+  background: rgba(var(--oksap-white-rgb), 0.08);
+  border: 1px solid rgba(var(--oksap-soft-rgb), 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.match-detail-shield-frame--wide {
+  width: 176px;
+  height: 104px;
+  border-radius: 24px;
+}
+
+.match-detail-shield {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
+}
+
+.match-detail-shield--wide {
+  padding: 0.15rem;
+  box-sizing: border-box;
 }
 
 .match-detail-team-link {
@@ -1566,6 +1662,25 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  .match-detail-shield-frame {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+  }
+
+  .match-detail-shield-frame--wide {
+    width: 136px;
+    height: 82px;
+    border-radius: 20px;
+  }
+
+  .match-detail-team,
+  .match-detail-team:last-child,
+  .match-detail-team--right {
+    align-items: center;
+    text-align: center;
+  }
+
   .match-corner {
     width: 70%;
   }
