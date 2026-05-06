@@ -231,27 +231,33 @@ a:hover {
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  column-gap: 1.25rem;
+  row-gap: 3rem;
   padding: 1.5rem 8vw 3rem;
   box-sizing: border-box;
+}
+
+.cards-grid--teams {
+  row-gap: 1.25rem;
 }
 
 .cards-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 3rem;
   padding: 1.5rem 8vw 3rem;
   box-sizing: border-box;
 }
 
 .home-next-matches .cards-list {
-  padding: 0;
+  padding: 0 0 0.5rem 0;
 }
 
 .card-link {
   text-decoration: none;
   color: inherit;
   display: block;
+  height: 100%;
 }
 
 /* ====== TeamCard ====== */
@@ -261,6 +267,10 @@ a:hover {
   border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
   border-radius: 16px;
   padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 1.25rem;
   transition:
           transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
           box-shadow 0.3s ease,
@@ -273,34 +283,27 @@ a:hover {
   border-color: rgba(var(--oksap-accent-rgb), 0.4);
 }
 
-.team-card-header {
+.team-card-body {
+  flex: 1;
+  min-width: 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.team-card-header {
+  margin-bottom: 0.75rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(var(--oksap-soft-rgb), 0.1);
 }
 
-.team-card-shield-frame {
+.team-card-shield-slot {
+  flex-shrink: 0;
   width: 72px;
-  height: 72px;
-  padding: 0.45rem;
-  border-radius: 18px;
-  background: rgba(var(--oksap-white-rgb), 0.08);
-  border: 1px solid rgba(var(--oksap-soft-rgb), 0.14);
+  align-self: stretch;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
-.team-card-shield-frame--wide {
-  width: 96px;
-  height: 64px;
-  border-radius: 16px;
 }
 
 .team-card-shield {
@@ -308,19 +311,12 @@ a:hover {
   height: 100%;
   object-fit: contain;
   display: block;
-  opacity: 0.96;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.team-card-shield--wide {
-  padding: 0.18rem;
-  box-sizing: border-box;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s ease;
 }
 
 .card-link:hover .team-card-shield {
-  opacity: 1;
-  transform: scale(1.02);
+  transform: scale(1.04);
 }
 
 .team-card-name {
@@ -371,11 +367,13 @@ a:hover {
   background: rgba(var(--oksap-primary-soft-rgb), 0.6);
   border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
   border-radius: 16px;
-  padding: 1.5rem 5.2rem;
+  padding: 0.9rem 4.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
+  height: 100%;
+  gap: 0.4rem;
   transition:
           transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
           box-shadow 0.3s ease,
@@ -415,7 +413,6 @@ a:hover {
   text-align: center;
   transition: color 0.2s ease;
   line-height: 1.2;
-  word-break: break-word;
 }
 
 .match-card-team--winner {
@@ -449,48 +446,38 @@ a:hover {
 
 @media (max-width: 768px) {
   .match-card {
-    padding: 1.25rem 4.6rem;
+    padding: 0.85rem 4rem;
   }
 
   .match-card-shield-frame {
-    width: 62px;
-    height: 62px;
-  }
-
-  .match-card-shield-frame--wide {
-    width: 82px;
-    height: 54px;
+    width: 96px;
+    border-radius: 22px;
   }
 
   .cards-grid {
     grid-template-columns: 1fr;
+    column-gap: 1.25rem;
+    row-gap: 3.5rem;
     padding: 1rem 6vw 2rem;
+  }
+
+  .cards-grid--teams {
+    row-gap: 1rem;
+  }
+
+  .cards-list {
+    gap: 3.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .match-card {
-    padding: 1.2rem 3.7rem;
+    padding: 0.9rem 3rem;
   }
 
   .match-card-shield-frame {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-  }
-
-  .match-card-shield-frame--wide {
-    width: 66px;
-    height: 44px;
-    border-radius: 12px;
-  }
-
-  .match-card-shield-frame--top {
-    left: 8px;
-  }
-
-  .match-card-shield-frame--bottom {
-    right: 8px;
+    width: 72px;
+    border-radius: 18px;
   }
 }
 
@@ -560,35 +547,24 @@ a:hover {
 /* Escudos en esquinas de match-card */
 .match-card-shield-frame {
   position: absolute;
-  width: 72px;
-  height: 72px;
-  padding: 0.4rem;
-  border-radius: 18px;
-  background: rgba(var(--oksap-white-rgb), 0.05);
-  border: 1px solid rgba(var(--oksap-soft-rgb), 0.08);
+  width: 120px;
+  top: 5px;
+  bottom: 5px;
   pointer-events: none;
   z-index: 0;
   opacity: 0.22;
   transition: opacity 0.3s ease;
-  box-sizing: border-box;
-}
-
-.match-card-shield-frame--wide {
-  width: 96px;
-  height: 62px;
-  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .match-card-shield-frame--top {
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
+  left: -14px;
 }
 
 .match-card-shield-frame--bottom {
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
+  right: -14px;
 }
 
 .match-card-shield {
@@ -1522,9 +1498,9 @@ a:hover {
   );
 }
 
-/* Asegura que el contenido de la tarjeta queda por encima del escudo y el acento */
-.team-card-header,
-.team-card-info {
+/* Asegura que el contenido de la tarjeta queda por encima del acento */
+.team-card-body,
+.team-card-shield-slot {
   position: relative;
   z-index: 1;
 }
@@ -1692,14 +1668,14 @@ a:hover {
 
 @media (max-width: 768px) {
   .match-detail-shield-slot {
-    width: 96px;
-    height: 96px;
+    width: 116px;
+    height: 116px;
   }
 
   .match-detail-shield-frame {
-    width: 96px;
-    height: 96px;
-    border-radius: 22px;
+    width: 116px;
+    height: 116px;
+    border-radius: 26px;
   }
 
   .match-detail-corner {
@@ -1713,14 +1689,14 @@ a:hover {
   }
 
   .match-detail-shield-slot {
-    width: 72px;
-    height: 72px;
+    width: 92px;
+    height: 92px;
   }
 
   .match-detail-shield-frame {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
+    width: 92px;
+    height: 92px;
+    border-radius: 20px;
   }
 
   .match-detail-vs {
@@ -1796,7 +1772,13 @@ a:hover {
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .home-next-matches-footer {
+    margin-top: 5rem;
+  }
 }
 
 .home-next-matches-link {

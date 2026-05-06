@@ -15,7 +15,7 @@ function Teams() {
                 </p>
             </div>
 
-            <div ref={gridRef} className="cards-grid stagger-grid">
+            <div ref={gridRef} className="cards-grid cards-grid--teams stagger-grid">
                 {equipos.map((equipo, index) => (
                     <TeamCard
                         key={equipo.id}

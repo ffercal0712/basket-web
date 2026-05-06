@@ -2,6 +2,7 @@ import unicajaShield from '../assets/escudos/unicaja.png';
 import puertaOscuraShield from '../assets/escudos/cd_puerta_oscura.png';
 import salliverShield from '../assets/escudos/cb_salliver.png';
 import oksapLogo from '../assets/logo-oksap.png';
+import cpMijasEscudo from '../assets/escudos/cp_mijas.png';
 
 const equipos = [
     {
@@ -36,7 +37,8 @@ const equipos = [
     {
         id: 6,
         slug: 'c-p-mijas',
-        equipo: 'C.P. MIJAS'
+        equipo: 'C.P. MIJAS',
+        escudo: cpMijasEscudo
     },
     {
         id: 7,
