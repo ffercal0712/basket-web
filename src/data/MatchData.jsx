@@ -30,7 +30,7 @@ function createPendingTeam(id, equipo, note) {
 
 const partidos = [
     {
-        id: 12,
+        id: 1,
         fecha: '16-05-2026',
         hora: '16:00',
         horaFin: '17:15',
@@ -42,7 +42,7 @@ const partidos = [
         ]
     },
     {
-        id: 13,
+        id: 2,
         fecha: '16-05-2026',
         hora: '17:15',
         horaFin: '18:30',
@@ -54,7 +54,7 @@ const partidos = [
         ]
     },
     {
-        id: 14,
+        id: 3,
         fecha: '16-05-2026',
         hora: '18:30',
         horaFin: '19:45',
@@ -66,7 +66,7 @@ const partidos = [
         ]
     },
     {
-        id: 15,
+        id: 4,
         fecha: '16-05-2026',
         hora: '19:45',
         horaFin: '21:00',
@@ -78,7 +78,7 @@ const partidos = [
         ]
     },
     {
-        id: 16,
+        id: 5,
         fecha: '17-05-2026',
         hora: '09:15',
         horaFin: '10:20',
@@ -90,7 +90,7 @@ const partidos = [
         ]
     },
     {
-        id: 17,
+        id: 6,
         fecha: '17-05-2026',
         hora: '10:20',
         horaFin: '11:30',
@@ -102,7 +102,7 @@ const partidos = [
         ]
     },
     {
-        id: 18,
+        id: 7,
         fecha: '17-05-2026',
         hora: '11:30',
         horaFin: '12:45',
@@ -114,7 +114,7 @@ const partidos = [
         ]
     },
     {
-        id: 19,
+        id: 8,
         fecha: '17-05-2026',
         hora: '12:45',
         horaFin: '14:00',

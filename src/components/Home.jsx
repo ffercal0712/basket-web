@@ -15,11 +15,18 @@ function Home() {
             partidoToDate(a.fecha, a.hora) - partidoToDate(b.fecha, b.hora)
         );
 
+    const ultimosJugados = [...matches]
+        .filter(p => partidoYaJugado(p))
+        .sort((a, b) =>
+            partidoToDate(b.fecha, b.hora) - partidoToDate(a.fecha, a.hora)
+        )
+        .slice(0, 4);
+
     return (
         <>
             <Banner />
             <Organizers />
-            <HomeNextMatches nextMatches={sinResultado} />
+            <HomeNextMatches nextMatches={sinResultado} lastMatches={ultimosJugados} />
             <LocationSection />
             <NormativaSection />
         </>

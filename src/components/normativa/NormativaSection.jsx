@@ -21,16 +21,6 @@ const reglas = [
             "Posesión: 24 segundos. Prórroga: 5 min corridos, último minuto a reloj parado.",
         ],
     },
-    {
-        id: 3,
-        icon: "📋",
-        titulo: "Inscripción de jugadores",
-        puntos: [
-            "Jugadores con 45 años o más en el año en curso.",
-            "Máximo 2 jugadores de entre 40 y 45 años por equipo.",
-            "Entregar: nombre completo, número de dorsal y fecha de nacimiento.",
-        ],
-    },
 ];
 
 function ReglaCard({ regla }) {
