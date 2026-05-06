@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&display=swap');
+
+:root {
+    /* ===== Paleta base ===== */
+    --oksap-bg: #000000;              /* Negro puro: nuevo fondo principal */
+    --oksap-primary: #000000;         /* Antes #1f1f23. Para mantener compatibilidad */
+    --oksap-primary-soft: #0a0a0a;    /* Antes #3c3c3c. Casi negro, para superficies elevadas */
+    --oksap-accent: #F5A7CB;          /* Rosa pastel "pabellón" - antes #FF6FB5 */
+    --oksap-soft: #CBEEF3;            /* Azul hielo - antes #6FDFEC */
+    --oksap-white: #FFFFFF;
+    --oksap-black: #000000;
+    --oksap-light: #DDDDDD;           /* Texto claro */
+    --oksap-gray: #666666;            /* Texto secundario */
+
+    /* ===== Versiones RGB para usar con rgba() ===== */
+    --oksap-bg-rgb: 0, 0, 0;
+    --oksap-primary-rgb: 0, 0, 0;
+    --oksap-primary-soft-rgb: 10, 10, 10;
+    --oksap-accent-rgb: 245, 167, 203;
+    --oksap-soft-rgb: 203, 238, 243;
+
+    /* ===== Bordes y superficies (estilo "card sobre negro") ===== */
+    --oksap-border: rgba(255, 255, 255, 0.08);
+    --oksap-border-strong: rgba(255, 255, 255, 0.16);
+    --oksap-card: rgba(255, 255, 255, 0.04);
+
+    /* ===== Roles semánticos ===== */
+    --color-bg: var(--oksap-bg);
+    --color-text: #DDDDDD;
+    --color-text-strong: var(--oksap-white);
+    --color-accent: var(--oksap-accent);
+    --color-soft: var(--oksap-soft);
+    --color-header-bg: rgba(0, 0, 0, 0.78);
+    --color-link: var(--oksap-soft);
+    --color-link-hover: var(--oksap-accent);
+}
+
+/* En modo oscuro reusamos exactamente la misma paleta porque el diseño YA es oscuro */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: var(--oksap-bg);
+        --color-text: #DDDDDD;
+        --color-text-strong: var(--oksap-white);
+    }
+}

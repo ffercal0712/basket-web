@@ -1,0 +1,546 @@
+/* Del banner de la página de inicio */
+
+@keyframes banner-enter {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 350px;
+    overflow: hidden;
+    padding-top: 25px;
+    /* Rosa esquina inferior izquierda + azul esquina inferior derecha */
+    background:
+        radial-gradient(ellipse 55% 70% at 0% 100%, rgba(var(--oksap-accent-rgb), 0.32) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 70% at 100% 100%, rgba(var(--oksap-soft-rgb), 0.36) 0%, transparent 60%);
+}
+
+/* Cancha decorativa SVG (capa de fondo) — centrada-derecha */
+.banner-court {
+    position: absolute;
+    bottom: -25px;
+    left: calc(50% + 30px);
+    width: 285px;
+    height: auto;
+    color: var(--oksap-soft);
+    opacity: 0.10;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Balón decorativo SVG (capa intermedia) — centrado-izquierda */
+.banner-basketball {
+    position: absolute;
+    bottom: -50px;
+    left: calc(50% - 275px);
+    width: 285px;
+    height: 285px;
+    color: var(--oksap-accent);
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Contenedor del título */
+.banner-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8vw;
+}
+
+/* El título */
+.banner-title {
+    font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    text-align: left;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    animation: banner-enter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.banner-title-glow {
+    color: var(--oksap-white);
+    text-shadow:
+            0 0 15px rgba(255, 255, 255, 0.6),
+            0 0 30px rgba(var(--oksap-accent-rgb), 0.5),
+            0 0 60px rgba(var(--oksap-accent-rgb), 0.3),
+            0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .banner {
+        height: 40vh;
+        min-height: 280px;
+    }
+
+    .banner-content {
+        padding: 0 6vw;
+    }
+
+    .banner-basketball {
+        width: 190px;
+        height: 190px;
+        bottom: -30px;
+        left: calc(50% - 185px);
+    }
+
+    .banner-court {
+        width: 190px;
+        bottom: -20px;
+        left: calc(50% + 10px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .banner-title {
+        animation: none;
+    }
+}
+
+/* ====== Sección de ubicación ====== */
+
+.location-section {
+    padding: 0;
+    max-width: 100%;
+}
+
+/* ====== Sección de organizadores ====== */
+
+.organizers {
+    width: 100%;
+    padding: 2.5rem 8vw;
+    background: rgba(0, 0, 0, 0.15);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.organizers-label {
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text);
+    margin: 0 0 1.5rem 0;
+    opacity: 0.85;
+}
+
+.organizers-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.organizer-link {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    opacity: 0.9;
+}
+
+.organizer-link:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+.organizer-logo {
+    height: 70px;
+    max-height: 70px;
+    min-height: 70px;
+    max-width: 200px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .organizers {
+        padding: 2rem 6vw;
+    }
+
+    .organizers-logos {
+        gap: 2rem;
+    }
+
+    .organizer-logo {
+        height: 55px;
+        max-height: 55px;
+        min-height: 55px;
+        max-width: 150px;
+    }
+}
+
+/* ====== Tarjetas de info: ubicación + fechas ====== */
+
+.location-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 2rem 8vw;
+    box-sizing: border-box;
+}
+
+.info-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition:
+            transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 0.4s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.info-card-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5);
+    z-index: 0;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.4s ease;
+}
+
+.info-card:hover .info-card-image {
+    transform: scale(1.08);
+    filter: brightness(0.6);
+}
+
+.location-card-image {
+    background-image: url('/src/assets/elola.jpeg');
+}
+
+.dates-card-image {
+    background-image: url('/src/assets/campo.jpeg'); /* cámbialo cuando tengas otra imagen */
+    filter: brightness(0.45);
+}
+
+.info-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+            to bottom,
+            rgba(var(--oksap-primary-rgb), 0.4) 0%,
+            rgba(var(--oksap-primary-rgb), 0.75) 100%
+    );
+    z-index: 1;
+}
+
+.info-card-content {
+    position: relative;
+    z-index: 2;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: var(--oksap-white);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.info-card-label {
+    display: inline-block;
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(var(--oksap-accent-rgb), 0.15);
+    border: 1px solid rgba(var(--oksap-accent-rgb), 0.4);
+    border-radius: 999px;
+}
+
+.info-card-title {
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--oksap-white);
+    margin: 0.8rem 0 0.5rem 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.info-card-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--oksap-white);
+    margin: 0.5rem 0 1.5rem 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    opacity: 0.95;
+}
+
+.info-card-cta {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--color-soft);
+    border-radius: 999px;
+    color: var(--color-soft);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    background: rgba(var(--oksap-primary-rgb), 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.info-card-cta:hover {
+    background: var(--color-soft);
+    color: var(--oksap-primary);
+}
+
+/* Badges de fechas */
+
+.dates-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.date-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(var(--oksap-accent-rgb), 0.95);
+    color: var(--oksap-primary);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    font-family: "Montserrat", system-ui, sans-serif;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.info-card:hover .date-badge {
+    transform: translateY(-4px);
+}
+
+.info-card:hover .date-badge:nth-child(2) {
+    transition-delay: 0.05s;
+}
+
+.date-badge-day {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.date-badge-month {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+}
+
+/* Responsive de las tarjetas */
+
+@media (max-width: 768px) {
+    .location-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.5rem 6vw;
+    }
+
+    .info-card {
+        min-height: 280px;
+    }
+
+    .info-card-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .date-badge {
+        width: 70px;
+        height: 70px;
+    }
+
+    .date-badge-day {
+        font-size: 1.7rem;
+    }
+}
+
+/* ====== Bloque de parkings ====== */
+
+.parking-block {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1726 / 638;
+    min-height: 420px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+.parking-item-link,
+.parking-item-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.parking-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('/src/assets/parkings2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+.parking-list {
+    position: relative;
+    z-index: 1;
+    width: min(420px, 90%);
+    padding: 2rem 1.5rem;
+    box-sizing: border-box;          /* ← AÑADIR ESTA LÍNEA */
+    background: rgba(var(--oksap-primary-rgb), 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+    color: var(--color-text);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.parking-title {
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--oksap-white);
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.parking-icon {
+    font-size: 1.6rem;
+}
+
+.parking-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.parking-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.9rem;
+    border-radius: 12px;
+    background: rgba(var(--oksap-soft-rgb), 0.08);
+    border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
+    transition: all 0.2s ease;
+}
+
+.parking-item:hover {
+    background: rgba(var(--oksap-soft-rgb), 0.15);
+    transform: translateX(-4px);
+}
+
+.parking-item-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--oksap-accent-rgb), 0.15);
+    border-radius: 10px;
+}
+
+.parking-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-size: 0.92rem;
+    line-height: 1.35;
+}
+
+.parking-item-text strong {
+    color: var(--oksap-white);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.parking-item-text span {
+    color: var(--color-text);
+    font-size: 0.85rem;
+}
+
+.parking-distance {
+    color: var(--color-accent) !important;
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+
+/* ====== Responsive ====== */
+
+@media (max-width: 768px) {
+    .location-section {
+        padding: 0;
+    }
+
+    .parking-block {
+        aspect-ratio: auto;
+        min-height: auto;
+        flex-direction: column;
+    }
+
+    .parking-image {
+        position: relative;
+        height: 0;
+        padding-bottom: 63.11%; /* 638/1011 */
+        background-image: url('/src/assets/parkings3.jpg');
+    }
+
+    .parking-list {
+        width: 100%;
+        border-radius: 0;
+        padding: 2rem 1.5rem;
+        box-shadow: none;
+        justify-content: flex-start;
+    }
+
+    .parking-item:hover {
+        transform: none;
+    }
+}
