@@ -371,7 +371,7 @@ a:hover {
   background: rgba(var(--oksap-primary-soft-rgb), 0.6);
   border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
   border-radius: 16px;
-  padding: 1.5rem 4.8rem;
+  padding: 1.5rem 5.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -407,13 +407,15 @@ a:hover {
 
 .match-card-team {
   font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-text-strong);
   flex: 1;
   text-align: center;
   transition: color 0.2s ease;
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 .match-card-team--winner {
@@ -447,22 +449,48 @@ a:hover {
 
 @media (max-width: 768px) {
   .match-card {
-    padding: 1.25rem 4rem;
+    padding: 1.25rem 4.6rem;
   }
 
   .match-card-shield-frame {
-    width: 50px;
-    height: 50px;
+    width: 62px;
+    height: 62px;
   }
 
   .match-card-shield-frame--wide {
-    width: 66px;
-    height: 44px;
+    width: 82px;
+    height: 54px;
   }
 
   .cards-grid {
     grid-template-columns: 1fr;
     padding: 1rem 6vw 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .match-card {
+    padding: 1.2rem 3.7rem;
+  }
+
+  .match-card-shield-frame {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+
+  .match-card-shield-frame--wide {
+    width: 66px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .match-card-shield-frame--top {
+    left: 8px;
+  }
+
+  .match-card-shield-frame--bottom {
+    right: 8px;
   }
 }
 
@@ -532,10 +560,10 @@ a:hover {
 /* Escudos en esquinas de match-card */
 .match-card-shield-frame {
   position: absolute;
-  width: 58px;
-  height: 58px;
-  padding: 0.35rem;
-  border-radius: 16px;
+  width: 72px;
+  height: 72px;
+  padding: 0.4rem;
+  border-radius: 18px;
   background: rgba(var(--oksap-white-rgb), 0.05);
   border: 1px solid rgba(var(--oksap-soft-rgb), 0.08);
   pointer-events: none;
@@ -546,9 +574,9 @@ a:hover {
 }
 
 .match-card-shield-frame--wide {
-  width: 76px;
-  height: 50px;
-  border-radius: 14px;
+  width: 96px;
+  height: 62px;
+  border-radius: 16px;
 }
 
 .match-card-shield-frame--top {
@@ -1245,14 +1273,16 @@ a:hover {
 
 .match-detail-team-link {
   font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-size: clamp(1rem, 3vw, 2rem);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.01em;
   color: var(--color-text-strong);
   text-decoration: none;
   transition: color 0.2s ease;
-  line-height: 1;
+  line-height: 1.15;
+  word-break: break-word;
+  text-align: center;
 }
 
 .match-detail-team-link:hover {
@@ -1683,6 +1713,39 @@ a:hover {
 
   .match-corner {
     width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .match-detail-scoreboard {
+    gap: 0.5rem;
+  }
+
+  .match-detail-shield-frame {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+  }
+
+  .match-detail-shield-frame--wide {
+    width: 104px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  .match-detail-vs {
+    min-width: 60px;
+  }
+
+  .match-detail-meta {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .detail-hero {
+    padding: 70px 5vw 2rem;
   }
 }
 
