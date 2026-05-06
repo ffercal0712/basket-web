@@ -550,6 +550,149 @@
 
 /* ====== Responsive ====== */
 
+/* ====== Bloque de restaurantes ====== */
+
+.restaurants-wrapper {
+    padding: 2rem 8vw 2.5rem;
+    box-sizing: border-box;
+}
+
+.restaurants-title {
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--oksap-white);
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.restaurants-title-icon {
+    font-size: 1.4rem;
+}
+
+.restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.restaurant-card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(var(--oksap-primary-soft-rgb), 0.6);
+    border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
+    border-radius: 16px;
+    padding: 1.5rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: inherit;
+    transition:
+            transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(var(--oksap-soft-rgb), 0.35);
+}
+
+.restaurant-card-icon {
+    font-size: 2rem;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.restaurant-card-body {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.restaurant-card-type {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    margin: 0 0 0.3rem 0;
+}
+
+.restaurant-card-name {
+    font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-text-strong);
+    margin: 0 0 0.5rem 0;
+}
+
+.restaurant-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--color-text);
+    opacity: 0.85;
+    margin: 0;
+}
+
+.restaurant-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(var(--oksap-soft-rgb), 0.12);
+    position: relative;
+    z-index: 1;
+}
+
+.restaurant-card-distance {
+    font-size: 0.8rem;
+    color: var(--color-text);
+    opacity: 0.7;
+}
+
+.restaurant-card-cta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-soft);
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.restaurant-card:hover .restaurant-card-cta {
+    color: var(--color-accent);
+}
+
+@media (max-width: 900px) {
+    .restaurants-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .restaurants-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .restaurants-wrapper {
+        padding: 1.5rem 6vw 2rem;
+    }
+}
+
+/* ====== Responsive parking ====== */
+
 @media (max-width: 768px) {
     .location-section {
         padding: 0;
@@ -578,5 +721,120 @@
 
     .parking-item:hover {
         transform: none;
+    }
+}
+
+/* ====== Sección de normativa ====== */
+
+.normativa-section {
+    padding: 3rem 8vw 4rem;
+    box-sizing: border-box;
+}
+
+.normativa-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.normativa-section-title {
+    font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--oksap-white);
+    margin: 0.4rem 0 0.6rem 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+.normativa-section-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    opacity: 0.75;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.normativa-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.normativa-card {
+    background: rgba(var(--oksap-primary-soft-rgb), 0.6);
+    border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition:
+            transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+}
+
+.normativa-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(var(--oksap-soft-rgb), 0.35);
+}
+
+.normativa-card-icon {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+}
+
+.normativa-card-title {
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-strong);
+    margin: 0;
+}
+
+.normativa-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.normativa-card-list li {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-text);
+    opacity: 0.88;
+    padding-left: 1.1rem;
+    position: relative;
+}
+
+.normativa-card-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0.3rem;
+    color: var(--color-accent);
+    font-weight: 900;
+}
+
+@media (max-width: 900px) {
+    .normativa-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .normativa-section {
+        padding: 2.5rem 6vw 3rem;
+    }
+
+    .normativa-grid {
+        grid-template-columns: 1fr;
     }
 }

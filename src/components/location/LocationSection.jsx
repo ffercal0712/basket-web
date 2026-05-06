@@ -1,6 +1,7 @@
 import LocationCard from "./LocationCard.jsx";
 import DatesCard from "./DatesCard.jsx";
 import ParkingBlock from "./ParkingBlock.jsx";
+import RestaurantsBlock from "./RestaurantsBlock.jsx";
 import { useReveal } from "../../hooks/useReveal.js";
 
 function LocationSection() {
@@ -15,6 +16,7 @@ function LocationSection() {
             <div ref={parkingRef} className="reveal">
                 <ParkingBlock />
             </div>
+            <RestaurantsBlock />
         </section>
     );
 }
