@@ -1,5 +1,5 @@
 import ParkingItem from "./ParkingItem.jsx";
-import { GOOGLE_MAPS_URL } from "./LocationCard.jsx";
+import { GOOGLE_MAPS_EMBED_URL } from "../../data/location.js";
 
 /**
  * Bloque que muestra una imagen del entorno del pabellón y un listado
@@ -10,15 +10,16 @@ import { GOOGLE_MAPS_URL } from "./LocationCard.jsx";
 function ParkingBlock() {
     return (
         <div className="parking-block">
-            <a
-                className="parking-image-link"
-                href={GOOGLE_MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir el Pabellón Elola en Google Maps"
-            >
-                <div className="parking-image"></div>
-            </a>
+            <div className="parking-map-shell">
+                <iframe
+                    className="parking-map-embed"
+                    src={GOOGLE_MAPS_EMBED_URL}
+                    title="Mapa interactivo del entorno del Pabellón Elola"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                />
+            </div>
 
             <aside className="parking-list">
                 <h3 className="parking-title">
