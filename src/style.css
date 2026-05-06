@@ -1232,11 +1232,21 @@ a:hover {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  text-align: center;
 }
 
 .match-detail-team:last-child {
-  text-align: right;
-  align-items: flex-end;
+  text-align: center;
+  align-items: center;
+}
+
+.match-detail-shield-slot {
+  width: 132px;
+  height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .match-detail-shield-frame {
@@ -1252,23 +1262,12 @@ a:hover {
   box-sizing: border-box;
 }
 
-.match-detail-shield-frame--wide {
-  width: 176px;
-  height: 104px;
-  border-radius: 24px;
-}
-
 .match-detail-shield {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
-}
-
-.match-detail-shield--wide {
-  padding: 0.15rem;
-  box-sizing: border-box;
 }
 
 .match-detail-team-link {
@@ -1685,33 +1684,25 @@ a:hover {
   z-index: 1;
 }
 
-/* El equipo derecho alinea todo a la derecha */
+/* Equipo derecho: igual centrado que el izquierdo */
 .match-detail-team--right {
-  align-items: flex-end;
-  text-align: right;
+  align-items: center;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
+  .match-detail-shield-slot {
+    width: 96px;
+    height: 96px;
+  }
+
   .match-detail-shield-frame {
     width: 96px;
     height: 96px;
     border-radius: 22px;
   }
 
-  .match-detail-shield-frame--wide {
-    width: 136px;
-    height: 82px;
-    border-radius: 20px;
-  }
-
-  .match-detail-team,
-  .match-detail-team:last-child,
-  .match-detail-team--right {
-    align-items: center;
-    text-align: center;
-  }
-
-  .match-corner {
+  .match-detail-corner {
     width: 70%;
   }
 }
@@ -1721,16 +1712,15 @@ a:hover {
     gap: 0.5rem;
   }
 
+  .match-detail-shield-slot {
+    width: 72px;
+    height: 72px;
+  }
+
   .match-detail-shield-frame {
     width: 72px;
     height: 72px;
     border-radius: 18px;
-  }
-
-  .match-detail-shield-frame--wide {
-    width: 104px;
-    height: 64px;
-    border-radius: 16px;
   }
 
   .match-detail-vs {

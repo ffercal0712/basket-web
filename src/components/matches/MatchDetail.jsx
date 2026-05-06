@@ -66,15 +66,13 @@ function MatchDetail() {
 
                     <div className="match-detail-scoreboard">
                         <div className={`match-detail-team ${ganadorId === equipo1.id ? 'match-detail-team--winner' : ''}`}>
-                            {equipo1.escudo && (
-                                <span className={`match-detail-shield-frame ${equipo1.logoVariant === 'wide' ? 'match-detail-shield-frame--wide' : ''}`}>
-                                    <img
-                                        src={equipo1.escudo}
-                                        alt={equipo1.equipo}
-                                        className={`match-detail-shield ${equipo1.logoVariant === 'wide' ? 'match-detail-shield--wide' : ''}`}
-                                    />
-                                </span>
-                            )}
+                            <div className="match-detail-shield-slot">
+                                {equipo1.escudo && (
+                                    <span className="match-detail-shield-frame">
+                                        <img src={equipo1.escudo} alt={equipo1.equipo} className="match-detail-shield" />
+                                    </span>
+                                )}
+                            </div>
                             <span className={`match-detail-team-link ${equipo1.placeholder ? 'match-detail-team-link--placeholder' : ''}`}>
                                 {equipo1.equipo}
                             </span>
@@ -100,15 +98,13 @@ function MatchDetail() {
                         </div>
 
                         <div className={`match-detail-team match-detail-team--right ${ganadorId === equipo2.id ? 'match-detail-team--winner' : ''}`}>
-                            {equipo2.escudo && (
-                                <span className={`match-detail-shield-frame ${equipo2.logoVariant === 'wide' ? 'match-detail-shield-frame--wide' : ''}`}>
-                                    <img
-                                        src={equipo2.escudo}
-                                        alt={equipo2.equipo}
-                                        className={`match-detail-shield ${equipo2.logoVariant === 'wide' ? 'match-detail-shield--wide' : ''}`}
-                                    />
-                                </span>
-                            )}
+                            <div className="match-detail-shield-slot">
+                                {equipo2.escudo && (
+                                    <span className="match-detail-shield-frame">
+                                        <img src={equipo2.escudo} alt={equipo2.equipo} className="match-detail-shield" />
+                                    </span>
+                                )}
+                            </div>
                             <span className={`match-detail-team-link ${equipo2.placeholder ? 'match-detail-team-link--placeholder' : ''}`}>
                                 {equipo2.equipo}
                             </span>
