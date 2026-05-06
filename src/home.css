@@ -834,3 +834,37 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ====== Sección de vídeo ====== */
+
+.video-section {
+    padding: 0 8vw 3rem;
+    box-sizing: border-box;
+}
+
+.video-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
+    background: #000;
+}
+
+.video-player {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .video-section {
+        padding: 0 6vw 2.5rem;
+    }
+
+    .video-wrapper {
+        border-radius: 14px;
+    }
+}

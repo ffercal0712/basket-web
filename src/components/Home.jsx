@@ -2,6 +2,7 @@ import Banner from "./Banner.jsx";
 import LocationSection from "./Location/LocationSection.jsx";
 import Organizers from "./Organizers/Organizers.jsx";
 import HomeNextMatches from "./matches/HomeNextMatches.jsx";
+import VideoSection from "./VideoSection.jsx";
 import { partidoToDate, partidoYaJugado } from "../data/MatchData.jsx";
 import { useMatches } from "../hooks/useMatches.js";
 import NormativaSection from "./normativa/NormativaSection.jsx";
@@ -26,6 +27,7 @@ function Home() {
         <>
             <Banner />
             <Organizers />
+            <VideoSection />
             <HomeNextMatches nextMatches={sinResultado} lastMatches={ultimosJugados} />
             <LocationSection />
             <NormativaSection />
