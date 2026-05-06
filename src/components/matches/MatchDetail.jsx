@@ -1,5 +1,5 @@
-import { useParams, Link } from "react-router-dom";
-import partidos, { formatearFechaCorta, estadoPartido } from "../../data/MatchData.jsx";
+import { useParams, Link } from 'react-router-dom';
+import partidos, { formatearFechaCorta, estadoPartido } from '../../data/MatchData.jsx';
 
 function MatchDetail() {
     const { partido } = useParams();
@@ -17,11 +17,12 @@ function MatchDetail() {
         );
     }
 
-    const { fecha, hora, horaFin, equipos } = foundMatch;
+    const { fecha, hora, horaFin, equipos, titulo, nota } = foundMatch;
     const [equipo1, equipo2] = equipos;
     const estado = estadoPartido(foundMatch);
-    const esEnJuego = estado === "en-juego";
-    const esFinalizados = estado === "finalizado";
+    const esEnJuego = estado === 'en-juego';
+    const esFinalizados = estado === 'finalizado';
+    const tieneCrucePendiente = equipo1.placeholder || equipo2.placeholder;
 
     const ganadorId = esFinalizados
         ? equipo1.puntuacion > equipo2.puntuacion
@@ -32,10 +33,10 @@ function MatchDetail() {
         : null;
 
     function cornerColor(equipoId) {
-        if (esEnJuego) return "soft";
-        if (estado === "proximo") return "white";
-        if (ganadorId === null) return "soft";
-        return ganadorId === equipoId ? "accent" : "soft";
+        if (esEnJuego) return 'soft';
+        if (estado === 'proximo') return 'white';
+        if (ganadorId === null) return 'soft';
+        return ganadorId === equipoId ? 'accent' : 'soft';
     }
 
     return (
@@ -53,17 +54,17 @@ function MatchDetail() {
                         <span className="match-detail-time">{hora} - {horaFin}</span>
                     </div>
 
+                    {titulo && (
+                        <p className={`match-detail-stage ${tieneCrucePendiente ? 'match-detail-stage--pending' : ''}`}>
+                            {titulo}
+                        </p>
+                    )}
+
                     <div className="match-detail-scoreboard">
-                        <div className={`match-detail-team ${ganadorId === equipo1.id ? "match-detail-team--winner" : ""}`}>
-                            {equipo1.escudo && (
-                                <div
-                                    className="match-detail-escudo match-detail-escudo--left"
-                                    style={{ backgroundImage: `url(${equipo1.escudo})` }}
-                                ></div>
-                            )}
-                            <Link to={`/equipos/${equipo1.slug}`} className="match-detail-team-link">
+                        <div className={`match-detail-team ${ganadorId === equipo1.id ? 'match-detail-team--winner' : ''}`}>
+                            <span className={`match-detail-team-link ${equipo1.placeholder ? 'match-detail-team-link--placeholder' : ''}`}>
                                 {equipo1.equipo}
-                            </Link>
+                            </span>
                             {esFinalizados && (
                                 <span className="match-detail-score">{equipo1.puntuacion}</span>
                             )}
@@ -73,7 +74,7 @@ function MatchDetail() {
                             {esEnJuego && (
                                 <span className="match-detail-result-badge match-detail-result-badge--live">En juego</span>
                             )}
-                            {estado === "proximo" && (
+                            {estado === 'proximo' && (
                                 <span className="match-detail-result-badge match-detail-result-badge--upcoming">Próximamente</span>
                             )}
                             {esFinalizados && (
@@ -83,16 +84,10 @@ function MatchDetail() {
                             )}
                         </div>
 
-                        <div className={`match-detail-team match-detail-team--right ${ganadorId === equipo2.id ? "match-detail-team--winner" : ""}`}>
-                            {equipo2.escudo && (
-                                <div
-                                    className="match-detail-escudo match-detail-escudo--right"
-                                    style={{ backgroundImage: `url(${equipo2.escudo})` }}
-                                ></div>
-                            )}
-                            <Link to={`/equipos/${equipo2.slug}`} className="match-detail-team-link">
+                        <div className={`match-detail-team match-detail-team--right ${ganadorId === equipo2.id ? 'match-detail-team--winner' : ''}`}>
+                            <span className={`match-detail-team-link ${equipo2.placeholder ? 'match-detail-team-link--placeholder' : ''}`}>
                                 {equipo2.equipo}
-                            </Link>
+                            </span>
                             {esFinalizados && (
                                 <span className="match-detail-score">{equipo2.puntuacion}</span>
                             )}
@@ -102,34 +97,16 @@ function MatchDetail() {
             </div>
 
             <div className="detail-body">
-                <div className="match-detail-teams-info">
-                    <div className="match-detail-team-block">
-                        <h2 className="detail-section-title">
-                            <Link to={`/equipos/${equipo1.slug}`}>{equipo1.equipo}</Link>
-                        </h2>
-                        <div className="players-grid">
-                            {equipo1.jugadores.map((j) => (
-                                <div key={j.id} className="player-card">
-                                    <span className="player-number">#{j.numero}</span>
-                                    <span className="player-name">{j.jugador}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="match-detail-team-block">
-                        <h2 className="detail-section-title">
-                            <Link to={`/equipos/${equipo2.slug}`}>{equipo2.equipo}</Link>
-                        </h2>
-                        <div className="players-grid">
-                            {equipo2.jugadores.map((j) => (
-                                <div key={j.id} className="player-card">
-                                    <span className="player-number">#{j.numero}</span>
-                                    <span className="player-name">{j.jugador}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                <div className="detail-message-card">
+                    <h2 className="detail-section-title">Información del partido</h2>
+                    <p className="detail-message-text">
+                        {nota}
+                    </p>
+                    {tieneCrucePendiente && (
+                        <p className="detail-message-text detail-message-text--subtle">
+                            Este cruce se actualizará automáticamente cuando quede cerrada la clasificación del sábado 16 de mayo de 2026.
+                        </p>
+                    )}
                 </div>
             </div>
         </>

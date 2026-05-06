@@ -1,5 +1,7 @@
 import InfoCard from "./InfoCard.jsx";
 
+export const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Pabell%C3%B3n+Elola+Fuengirola";
+
 /**
  * Tarjeta de ubicación del torneo.
  * Muestra el lugar, dirección y enlace a Google Maps.
@@ -20,7 +22,7 @@ function LocationCard() {
 
             <a
                 className="info-card-cta"
-                href="https://www.google.com/maps/search/?api=1&query=Pabell%C3%B3n+Elola+Fuengirola"
+                href={GOOGLE_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
             >

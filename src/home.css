@@ -211,6 +211,13 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
+.info-card-media-link {
+    position: absolute;
+    inset: 0;
+    display: block;
+    z-index: 0;
+}
+
 .info-card-image {
     position: absolute;
     inset: 0;
@@ -244,6 +251,7 @@
             rgba(var(--oksap-primary-rgb), 0.75) 100%
     );
     z-index: 1;
+    pointer-events: none;
 }
 
 .info-card-content {
@@ -254,6 +262,14 @@
     color: var(--oksap-white);
     width: 100%;
     box-sizing: border-box;
+}
+
+.info-card-content--with-media-link {
+    pointer-events: none;
+}
+
+.info-card-content--with-media-link .info-card-cta {
+    pointer-events: auto;
 }
 
 .info-card-label {
@@ -415,6 +431,13 @@
     z-index: 0;
 }
 
+.parking-image-link {
+    position: absolute;
+    inset: 0;
+    display: block;
+    z-index: 0;
+}
+
 .parking-list {
     position: relative;
     z-index: 1;
@@ -530,6 +553,10 @@
         height: 0;
         padding-bottom: 63.11%; /* 638/1011 */
         background-image: url('/src/assets/parkings3.jpg');
+    }
+
+    .parking-image-link {
+        position: relative;
     }
 
     .parking-list {

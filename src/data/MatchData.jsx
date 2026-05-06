@@ -1,245 +1,128 @@
-import equipos from "./TeamData.jsx";
+import equipos from './TeamData.jsx';
 
-let partidos;
-partidos = [
-    /*{
-        id: 1,
-        fecha: "16-05-2025",
-        hora: "10:00",
-        horaFin: "12:00",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 1),
-                puntuacion: 2
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 2),
-                puntuacion: 3
-            }
-        ]
-    },
-    {
-        id: 2,
-        fecha: "17-05-2025",
-        hora: "12:30",
-        horaFin: "14:30",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 2),
-                puntuacion: 1
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 1),
-                puntuacion: 1
-            }
-        ]
-    },
-    {
-        id: 3,
-        fecha: "16-05-2026",
-        hora: "11:15",
-        horaFin: "13:15",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 3),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 2),
-                puntuacion: 0
-            }
-        ]
-    },
-    {
-        id: 4,
-        fecha: "16-05-2026",
-        hora: "12:30",
-        horaFin: "14:30",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 1),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 3),
-                puntuacion: 0
-            }
-        ]
-    },
-    {
-        id: 5,
-        fecha: "16-05-2026",
-        hora: "10:00",
-        horaFin: "12:00",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 4),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 2),
-                puntuacion: 0
-            }
-        ]
-    },
-    {
-        id: 6,
-        fecha: "17-05-2026",
-        hora: "09:45",
-        horaFin: "11:45",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 1),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 4),
-                puntuacion: 0
-            }
-        ]
-    },
-    {
-        id: 7,
-        fecha: "17-05-2025",
-        hora: "13:55",
-        horaFin: "15:55",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 3),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 4),
-                puntuacion: 2
-            }
-        ]
-    },
-    {
-        id: 8,
-        fecha: "16-05-2025",
-        hora: "12:10",
-        horaFin: "14:10",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 2),
-                puntuacion: 1
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 3),
-                puntuacion: 0
-            }
-        ]
-    },
-    {
-        id: 9,
-        fecha: "16-05-2025",
-        hora: "13:25",
-        horaFin: "15:25",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 3),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 4),
-                puntuacion: 0
-            }
-        ]
-    },
-    {
-        id: 10,
-        fecha: "16-05-2025",
-        hora: "11:10",
-        horaFin: "13:10",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 3),
-                puntuacion: 4
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 1),
-                puntuacion: 1
-            }
-        ]
-    },
-    {
-        id: 11,
-        fecha: "30-04-2026",
-        hora: "11:10",
-        horaFin: "19:10",
-        equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 3),
-                puntuacion: 4
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 1),
-                puntuacion: 1
-            }
-        ]
-    },*/
+function getTeamById(id) {
+    const equipo = equipos.find((item) => item.id === id);
+
+    if (!equipo) {
+        throw new Error(`Equipo no encontrado para el id ${id}`);
+    }
+
+    return equipo;
+}
+
+function createScheduledTeam(id, puntuacion = 0) {
+    return {
+        ...getTeamById(id),
+        puntuacion
+    };
+}
+
+function createPendingTeam(id, equipo, note) {
+    return {
+        id: `pending-${id}`,
+        slug: null,
+        equipo,
+        note,
+        placeholder: true,
+        puntuacion: 0
+    };
+}
+
+const partidos = [
     {
         id: 12,
-        fecha: "16-05-2026",
-        hora: "16:00",
-        horaFin: "17:15",
+        fecha: '16-05-2026',
+        hora: '16:00',
+        horaFin: '17:15',
+        titulo: 'Jornada del sábado',
+        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 10),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 5),
-                puntuacion: 0
-            }
+            createScheduledTeam(1),
+            createScheduledTeam(2)
         ]
     },
     {
         id: 13,
-        fecha: "16-05-2026",
-        hora: "17:15",
-        horaFin: "18:30",
+        fecha: '16-05-2026',
+        hora: '17:15',
+        horaFin: '18:30',
+        titulo: 'Jornada del sábado',
+        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 10),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 6),
-                puntuacion: 0
-            }
+            createScheduledTeam(3),
+            createScheduledTeam(4)
         ]
     },
     {
         id: 14,
-        fecha: "16-05-2026",
-        hora: "18:30",
-        horaFin: "19:45",
+        fecha: '16-05-2026',
+        hora: '18:30',
+        horaFin: '19:45',
+        titulo: 'Jornada del sábado',
+        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 10),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 7),
-                puntuacion: 0
-            }
+            createScheduledTeam(5),
+            createScheduledTeam(6)
         ]
     },
     {
         id: 15,
-        fecha: "16-05-2026",
-        hora: "19:45",
-        horaFin: "21:00",
+        fecha: '16-05-2026',
+        hora: '19:45',
+        horaFin: '21:00',
+        titulo: 'Jornada del sábado',
+        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
-            {
-                ...equipos.find((equipo) => equipo.id === 9),
-                puntuacion: 0
-            },
-            {
-                ...equipos.find((equipo) => equipo.id === 8),
-                puntuacion: 0
-            }
+            createScheduledTeam(7),
+            createScheduledTeam(8)
+        ]
+    },
+    {
+        id: 16,
+        fecha: '17-05-2026',
+        hora: '09:15',
+        horaFin: '10:20',
+        titulo: 'Cruce 7º vs 8º',
+        nota: 'Los equipos se definirán cuando termine la clasificación del sábado.',
+        equipos: [
+            createPendingTeam(7, '7º clasificado', 'Pendiente de clasificación del sábado.'),
+            createPendingTeam(8, '8º clasificado', 'Pendiente de clasificación del sábado.')
+        ]
+    },
+    {
+        id: 17,
+        fecha: '17-05-2026',
+        hora: '10:20',
+        horaFin: '11:30',
+        titulo: 'Cruce 5º vs 6º',
+        nota: 'Los equipos se definirán cuando termine la clasificación del sábado.',
+        equipos: [
+            createPendingTeam(5, '5º clasificado', 'Pendiente de clasificación del sábado.'),
+            createPendingTeam(6, '6º clasificado', 'Pendiente de clasificación del sábado.')
+        ]
+    },
+    {
+        id: 18,
+        fecha: '17-05-2026',
+        hora: '11:30',
+        horaFin: '12:45',
+        titulo: 'Cruce 3º vs 4º',
+        nota: 'Los equipos se definirán cuando termine la clasificación del sábado.',
+        equipos: [
+            createPendingTeam(3, '3º clasificado', 'Pendiente de clasificación del sábado.'),
+            createPendingTeam(4, '4º clasificado', 'Pendiente de clasificación del sábado.')
+        ]
+    },
+    {
+        id: 19,
+        fecha: '17-05-2026',
+        hora: '12:45',
+        horaFin: '14:00',
+        titulo: 'Final del torneo',
+        nota: 'La jugarán el 1º y el 2º clasificado de la jornada del sábado.',
+        equipos: [
+            createPendingTeam(1, '1º clasificado', 'Pendiente de clasificación del sábado.'),
+            createPendingTeam(2, '2º clasificado', 'Pendiente de clasificación del sábado.')
         ]
     }
 ];
@@ -252,8 +135,8 @@ partidos = [
  * @returns {Date}
  */
 export function partidoToDate(fecha, hora) {
-    const [day, month, year] = fecha.split("-").map(Number);
-    const [hours, minutes] = hora.split(":").map(Number);
+    const [day, month, year] = fecha.split('-').map(Number);
+    const [hours, minutes] = hora.split(':').map(Number);
     return new Date(year, month - 1, day, hours, minutes);
 }
 
@@ -265,9 +148,9 @@ export function estadoPartido(partido) {
     const inicio = partidoToDate(partido.fecha, partido.hora);
     const fin = partidoToDate(partido.fecha, partido.horaFin);
 
-    if (ahora < inicio) return "proximo";
-    if (ahora >= inicio && ahora < fin) return "en-juego";
-    return "finalizado";
+    if (ahora < inicio) return 'proximo';
+    if (ahora >= inicio && ahora < fin) return 'en-juego';
+    return 'finalizado';
 }
 
 /**
@@ -278,11 +161,11 @@ export function estadoPartido(partido) {
  * @returns {boolean}
  */
 export function partidoYaJugado(partido) {
-    return estadoPartido(partido) === "finalizado";
+    return estadoPartido(partido) === 'finalizado';
 }
 
 export function formatearFechaCorta(fecha) {
-    const [day, month] = fecha.split("-");
+    const [day, month] = fecha.split('-');
     return `${day}/${month}`;
 }
 

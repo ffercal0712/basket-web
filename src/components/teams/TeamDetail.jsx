@@ -1,10 +1,9 @@
-import { useParams, Link } from "react-router-dom";
-import equipos from "../../data/TeamData.jsx";
+import { useParams, Link } from 'react-router-dom';
+import equipos from '../../data/TeamData.jsx';
 
 function TeamDetail() {
     const { equipo } = useParams();
-    //const tId = Number(equipo); // <--- Si se utiliza el id
-    const tSlug = equipo; // <--- Si se utiliza el slug
+    const tSlug = equipo;
     const foundTeam = equipos.find((e) => e.slug === tSlug);
 
     if (!foundTeam) {
@@ -18,55 +17,32 @@ function TeamDetail() {
         );
     }
 
-    const { equipo: nombre, capitan, jugadores, escudo } = foundTeam;
+    const { equipo: nombre } = foundTeam;
 
     return (
         <>
-            <div className="detail-hero">
+            <div className="detail-hero team-detail-hero">
                 <div className="team-detail-glow"></div>
                 <div className="detail-hero-content">
                     <Link to="/equipos" className="detail-breadcrumb">← Equipos</Link>
 
-                    <div className="detail-hero-main">
+                    <div className="detail-hero-main detail-hero-main--simple">
                         <div className="detail-hero-info">
                             <h1 className="detail-hero-title">{nombre}</h1>
-                            <div className="detail-hero-stats">
-                                <div className="detail-stat">
-                                    <span className="detail-stat-value">{jugadores.length}</span>
-                                    <span className="detail-stat-label">Jugadores</span>
-                                </div>
-                                <div className="detail-stat">
-                                    <span className="detail-stat-value">{capitan ?? "—"}</span>
-                                    <span className="detail-stat-label">Capitán</span>
-                                </div>
-                            </div>
+                            <p className="detail-hero-copy">
+                                La web pública solo muestra los equipos inscritos y los horarios oficiales del torneo.
+                            </p>
                         </div>
-
-                        {escudo && (
-                            <img
-                                src={escudo}
-                                alt={`Escudo de ${nombre}`}
-                                className="detail-hero-escudo"
-                            />
-                        )}
                     </div>
                 </div>
             </div>
 
             <div className="detail-body">
-                <h2 className="detail-section-title">
-                    <span>🏀</span> Plantilla
-                </h2>
-                <div className="players-grid">
-                    {jugadores.map((jugador) => (
-                        <div key={jugador.id} className="player-card">
-                            <span className="player-number">#{jugador.numero}</span>
-                            <span className="player-name">{jugador.jugador}</span>
-                            {capitan === jugador.jugador && (
-                                <span className="player-captain-badge">C</span>
-                            )}
-                        </div>
-                    ))}
+                <div className="detail-message-card">
+                    <h2 className="detail-section-title">Información del equipo</h2>
+                    <p className="detail-message-text">
+                        La plantilla de jugadores y otros datos internos no se publican en esta versión.
+                    </p>
                 </div>
             </div>
         </>
