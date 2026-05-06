@@ -4,6 +4,7 @@ import Organizers from "./Organizers/Organizers.jsx";
 import HomeNextMatches from "./matches/HomeNextMatches.jsx";
 import { partidoToDate, partidoYaJugado } from "../data/MatchData.jsx";
 import { useMatches } from "../hooks/useMatches.js";
+import NormativaSection from "./normativa/NormativaSection.jsx";
 
 function Home() {
     const { matches } = useMatches();
@@ -20,6 +21,7 @@ function Home() {
             <Organizers />
             <HomeNextMatches nextMatches={sinResultado} />
             <LocationSection />
+            <NormativaSection />
         </>
     );
 }
