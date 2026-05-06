@@ -10,7 +10,7 @@ function getTeamById(id) {
     return equipo;
 }
 
-function createScheduledTeam(id, puntuacion = 0) {
+function createScheduledTeam(id, puntuacion = null) {
     return {
         ...getTeamById(id),
         puntuacion
@@ -24,7 +24,7 @@ function createPendingTeam(id, equipo, note) {
         equipo,
         note,
         placeholder: true,
-        puntuacion: 0
+        puntuacion: null
     };
 }
 
@@ -162,6 +162,10 @@ export function estadoPartido(partido) {
  */
 export function partidoYaJugado(partido) {
     return estadoPartido(partido) === 'finalizado';
+}
+
+export function partidoTieneResultado(partido) {
+    return partido.equipos.every((equipo) => Number.isFinite(equipo.puntuacion));
 }
 
 export function formatearFechaCorta(fecha) {

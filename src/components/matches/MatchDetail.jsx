@@ -1,10 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
-import partidos, { formatearFechaCorta, estadoPartido } from '../../data/MatchData.jsx';
+import { formatearFechaCorta, estadoPartido, partidoTieneResultado } from '../../data/MatchData.jsx';
+import { useMatches } from '../../hooks/useMatches.js';
 
 function MatchDetail() {
+    const { matches } = useMatches();
     const { partido } = useParams();
     const pId = Number(partido);
-    const foundMatch = partidos.find((p) => p.id === pId);
+    const foundMatch = matches.find((p) => p.id === pId);
 
     if (!foundMatch) {
         return (
@@ -23,8 +25,9 @@ function MatchDetail() {
     const esEnJuego = estado === 'en-juego';
     const esFinalizados = estado === 'finalizado';
     const tieneCrucePendiente = equipo1.placeholder || equipo2.placeholder;
+    const tieneResultado = partidoTieneResultado(foundMatch);
 
-    const ganadorId = esFinalizados
+    const ganadorId = esFinalizados && tieneResultado
         ? equipo1.puntuacion > equipo2.puntuacion
             ? equipo1.id
             : equipo2.puntuacion > equipo1.puntuacion
@@ -35,6 +38,7 @@ function MatchDetail() {
     function cornerColor(equipoId) {
         if (esEnJuego) return 'soft';
         if (estado === 'proximo') return 'white';
+        if (!tieneResultado) return 'soft';
         if (ganadorId === null) return 'soft';
         return ganadorId === equipoId ? 'accent' : 'soft';
     }
@@ -65,7 +69,7 @@ function MatchDetail() {
                             <span className={`match-detail-team-link ${equipo1.placeholder ? 'match-detail-team-link--placeholder' : ''}`}>
                                 {equipo1.equipo}
                             </span>
-                            {esFinalizados && (
+                            {esFinalizados && tieneResultado && (
                                 <span className="match-detail-score">{equipo1.puntuacion}</span>
                             )}
                         </div>
@@ -78,9 +82,11 @@ function MatchDetail() {
                                 <span className="match-detail-result-badge match-detail-result-badge--upcoming">Próximamente</span>
                             )}
                             {esFinalizados && (
-                                ganadorId === null
-                                    ? <span className="match-detail-result-badge match-detail-result-badge--draw">Empate</span>
-                                    : <span className="match-detail-result-badge match-detail-result-badge--final">Final</span>
+                                !tieneResultado
+                                    ? <span className="match-detail-result-badge match-detail-result-badge--pending">Resultado pendiente</span>
+                                    : ganadorId === null
+                                        ? <span className="match-detail-result-badge match-detail-result-badge--draw">Empate</span>
+                                        : <span className="match-detail-result-badge match-detail-result-badge--final">Final</span>
                             )}
                         </div>
 
@@ -88,7 +94,7 @@ function MatchDetail() {
                             <span className={`match-detail-team-link ${equipo2.placeholder ? 'match-detail-team-link--placeholder' : ''}`}>
                                 {equipo2.equipo}
                             </span>
-                            {esFinalizados && (
+                            {esFinalizados && tieneResultado && (
                                 <span className="match-detail-score">{equipo2.puntuacion}</span>
                             )}
                         </div>
@@ -102,6 +108,11 @@ function MatchDetail() {
                     <p className="detail-message-text">
                         {nota}
                     </p>
+                    {esFinalizados && !tieneResultado && (
+                        <p className="detail-message-text detail-message-text--subtle">
+                            El partido ha terminado, pero el resultado todavía no se ha cargado desde el panel de administración.
+                        </p>
+                    )}
                     {tieneCrucePendiente && (
                         <p className="detail-message-text detail-message-text--subtle">
                             Este cruce se actualizará automáticamente cuando quede cerrada la clasificación del sábado 16 de mayo de 2026.

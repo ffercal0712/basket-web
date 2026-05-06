@@ -520,6 +520,234 @@ a:hover {
   margin-bottom: 2rem;
 }
 
+.admin-results-panel {
+  margin: 0 8vw 2rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
+  background: rgba(var(--oksap-primary-soft-rgb), 0.58);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.admin-results-panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.admin-results-panel-label {
+  margin: 0 0 0.4rem;
+  font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-accent);
+}
+
+.admin-results-panel-title {
+  margin: 0;
+  font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-text-strong);
+}
+
+.admin-results-panel-copy {
+  margin: 0.5rem 0 0;
+  max-width: 44rem;
+  color: var(--color-text);
+  opacity: 0.84;
+}
+
+.admin-result-action {
+  border: 0;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.admin-result-action:hover {
+  transform: translateY(-1px);
+}
+
+.admin-results-list {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-results-empty {
+  margin: 0;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.admin-results-error,
+.admin-results-message,
+.admin-access-status,
+.admin-access-page-status {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.admin-results-error {
+  color: #ff9d9d;
+}
+
+.admin-results-message {
+  font-size: 0.92rem;
+  opacity: 0.9;
+}
+
+.admin-pin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-access-page {
+  padding: 0 8vw 3rem;
+}
+
+.admin-access-page-card {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--oksap-soft-rgb), 0.15);
+  background: rgba(var(--oksap-primary-soft-rgb), 0.58);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.admin-access-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-access-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.admin-access-page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  background: var(--color-accent);
+  color: var(--oksap-primary);
+}
+
+.admin-result-card {
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(var(--oksap-soft-rgb), 0.14);
+  background: rgba(var(--oksap-primary-rgb), 0.38);
+}
+
+.admin-result-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-soft);
+}
+
+.admin-result-card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: end;
+}
+
+.admin-score-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-score-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-text-strong);
+}
+
+.admin-score-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(var(--oksap-soft-rgb), 0.2);
+  background: rgba(var(--oksap-primary-rgb), 0.52);
+  color: var(--oksap-white);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.admin-score-divider {
+  align-self: center;
+  padding-bottom: 0.8rem;
+  font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-soft);
+}
+
+.admin-result-card-actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.admin-result-action {
+  padding: 0.75rem 1.1rem;
+}
+
+.admin-result-action--primary {
+  background: var(--color-accent);
+  color: var(--oksap-primary);
+}
+
+.admin-result-action--primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.admin-result-action--secondary {
+  background: rgba(var(--oksap-soft-rgb), 0.18);
+  color: var(--color-soft);
+}
+
+.admin-result-status {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+.admin-result-status--saved {
+  color: var(--color-accent);
+  opacity: 1;
+}
+
 .matches-section-title {
   font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
   font-size: 0.85rem;
@@ -577,6 +805,12 @@ a:hover {
   background: rgba(var(--oksap-soft-rgb), 0.15);
   color: var(--color-soft);
   border: 1px solid rgba(var(--oksap-soft-rgb), 0.3);
+}
+
+.match-card-badge--pending-result {
+  background: rgba(var(--oksap-accent-rgb), 0.14);
+  color: var(--color-accent);
+  border: 1px solid rgba(var(--oksap-accent-rgb), 0.28);
 }
 
 .match-card-stage {
@@ -946,6 +1180,12 @@ a:hover {
   border: 1px solid rgba(var(--oksap-soft-rgb), 0.25);
 }
 
+.match-detail-result-badge--pending {
+  background: rgba(var(--oksap-accent-rgb), 0.14);
+  color: var(--color-accent);
+  border: 1px solid rgba(var(--oksap-accent-rgb), 0.28);
+}
+
 .match-detail-teams-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1006,8 +1246,29 @@ a:hover {
     padding: 2rem 6vw 1.5rem;
   }
 
+  .admin-results-panel {
+    margin: 0 6vw 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .admin-results-panel-header {
+    flex-direction: column;
+  }
+
+  .admin-result-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-score-divider {
+    display: none;
+  }
+
   .matches-section-title {
     padding: 0 6vw;
+  }
+
+  .admin-access-page {
+    padding: 0 6vw 2rem;
   }
 
   .detail-hero {

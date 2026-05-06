@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import NavMenu from "./NavMenu.jsx";
 import NavItem from "./NavItem.jsx";
+import { useAdminSession } from "../../hooks/useAdminSession.js";
 
 function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const { isAdminUnlocked } = useAdminSession();
 
     const PX_BEFORE_VISIBLE = 20;
 
@@ -53,6 +55,7 @@ function Header() {
                     <NavItem link="/"          title="INICIO"   onClose={close} />
                     <NavItem link="/equipos"   title="EQUIPOS"  onClose={close} />
                     <NavItem link="/partidos"  title="PARTIDOS" onClose={close} />
+                    <NavItem link="/admin"     title={isAdminUnlocked ? "ADMIN ACTIVO" : "ADMIN"} onClose={close} />
                 </NavMenu>
             </div>
 

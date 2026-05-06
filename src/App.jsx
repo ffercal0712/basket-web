@@ -7,20 +7,25 @@ import Matches from "./components/matches/Matches.jsx";
 import MatchDetail from "./components/matches/MatchDetail.jsx";
 import AvisoLegal from "./components/legal/AvisoLegal.jsx";
 import Privacidad from "./components/legal/Privacidad.jsx";
+import AdminAccess from "./components/admin/AdminAccess.jsx";
+import { AdminSessionProvider } from "./context/AdminSessionProvider.jsx";
 
 function App() {
     return (
-        <Routes>
-            <Route element={<Layout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/equipos" element={<Teams />} />
-                <Route path="/equipos/:equipo" element={<TeamDetail />} />
-                <Route path="/partidos" element={<Matches />} />
-                <Route path="/partidos/:partido" element={<MatchDetail />} />
-                <Route path="/aviso-legal" element={<AvisoLegal />} />
-                <Route path="/privacidad" element={<Privacidad />} />
-            </Route>
-        </Routes>
+        <AdminSessionProvider>
+            <Routes>
+                <Route element={<Layout />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/equipos" element={<Teams />} />
+                    <Route path="/equipos/:equipo" element={<TeamDetail />} />
+                    <Route path="/partidos" element={<Matches />} />
+                    <Route path="/partidos/:partido" element={<MatchDetail />} />
+                    <Route path="/admin" element={<AdminAccess />} />
+                    <Route path="/aviso-legal" element={<AvisoLegal />} />
+                    <Route path="/privacidad" element={<Privacidad />} />
+                </Route>
+            </Routes>
+        </AdminSessionProvider>
     );
 }
 
