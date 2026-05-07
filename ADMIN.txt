@@ -1,0 +1,64 @@
+PANEL DE ADMINISTRACIÓN — GUÍA RÁPIDA
+2º Torneo OKSAP · Veteranos Basket 2026
+======================================
+
+CÓMO ENTRAR
+-----------
+1. Ve a la dirección /admin en el navegador.
+2. Escribe el PIN y pulsa "Entrar como admin".
+3. Una vez dentro, ve a la sección "Partidos" (/partidos).
+
+La sesión dura mientras el navegador esté abierto. Si lo cierras, tendrás que
+volver a entrar con el PIN.
+
+
+QUÉ VES CUANDO ESTÁS COMO ADMIN
+---------------------------------
+En lugar de la vista normal de partidos, verás los 8 partidos del torneo
+en modo edición. Cada tarjeta tiene un botón "Editar partido".
+
+
+QUÉ PUEDES EDITAR EN CADA PARTIDO
+-----------------------------------
+Al pulsar "Editar partido" en cualquier tarjeta puedes cambiar:
+
+  - Fecha del partido
+  - Hora de inicio y hora de fin
+  - Título o nombre de la fase (ej: "Final del torneo")
+  - Equipo local y equipo visitante (útil para los partidos del domingo,
+    que empiezan con equipos "pendientes de clasificación")
+  - Resultado local y resultado visitante
+
+Cuando termines de rellenar, pulsa "Guardar cambios".
+Si algo va mal aparecerá un mensaje de error debajo del formulario.
+
+Para borrar solo el marcador sin tocar nada más, usa "Limpiar resultado".
+
+
+CUÁNDO INTRODUCIR LOS RESULTADOS
+----------------------------------
+Puedes editar cualquier partido en cualquier momento (antes, durante o después).
+Lo más habitual es:
+  - Antes del domingo: asignar los equipos reales a los partidos del domingo
+    (que en principio aparecen como "1º clasificado", "2º clasificado", etc.)
+  - Al terminar cada partido: entrar el marcador final
+
+
+LOS CAMBIOS SE VEN EN TODOS LOS DISPOSITIVOS
+---------------------------------------------
+En cuanto guardas un cambio, aparece en todos los móviles u ordenadores
+que estén viendo la página. No hace falta que nadie recargue. El refresco
+es automático cada ~10 segundos.
+
+
+CERRAR SESIÓN
+-------------
+Pulsa "Cerrar sesión admin" en la parte superior de la página de partidos,
+o vuelve a /admin y pulsa el botón de cerrar sesión.
+
+
+SI ALGO FALLA
+--------------
+- Si el PIN deja de funcionar, la sesión se cierra sola: vuelve a /admin.
+- Si hay error de conexión, los cambios no se guardarán hasta que vuelva
+  la conexión a internet.
