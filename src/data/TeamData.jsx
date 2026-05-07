@@ -1,4 +1,4 @@
-import unicajaShield from '../assets/escudos/unicaja.png';
+import unicajaShield from '../assets/escudos/unicaja2.png';
 import puertaOscuraShield from '../assets/escudos/cd_puerta_oscura.png';
 import salliverShield from '../assets/escudos/cb_salliver.png';
 import oksapLogo from '../assets/logo-oksap.png';
