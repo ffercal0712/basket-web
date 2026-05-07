@@ -19,7 +19,7 @@ function MatchDetail() {
         );
     }
 
-    const { fecha, hora, horaFin, equipos, titulo } = foundMatch;
+    const { fecha, hora, equipos, titulo } = foundMatch;
     const [equipo1, equipo2] = equipos;
     const estado = estadoPartido(foundMatch);
     const esEnJuego = estado === 'en-juego';
@@ -55,7 +55,7 @@ function MatchDetail() {
                     <div className="match-detail-meta">
                         <span className="match-detail-date">{formatearFechaCorta(fecha)}</span>
                         <span className="match-detail-separator">·</span>
-                        <span className="match-detail-time">{hora} - {horaFin}</span>
+                        <span className="match-detail-time">{hora}</span>
                     </div>
 
                     {titulo && (
@@ -116,24 +116,22 @@ function MatchDetail() {
                 </div>
             </div>
 
-            <div className="detail-body">
-                <div className="detail-message-card">
-                    <h2 className="detail-section-title">Información del partido</h2>
-                    <p className="detail-message-text">
-                        La información pública muestra el cruce, el horario oficial y el resultado cuando esté cargado.
-                    </p>
-                    {esFinalizados && !tieneResultado && (
-                        <p className="detail-message-text detail-message-text--subtle">
-                            El partido ha terminado, pero el resultado todavía no se ha cargado desde el panel de administración.
-                        </p>
-                    )}
-                    {tieneCrucePendiente && (
-                        <p className="detail-message-text detail-message-text--subtle">
-                            Este cruce se actualizará automáticamente cuando quede cerrada la clasificación del sábado 16 de mayo de 2026.
-                        </p>
-                    )}
+            {(esFinalizados && !tieneResultado) || tieneCrucePendiente ? (
+                <div className="detail-body">
+                    <div className="detail-message-card">
+                        {esFinalizados && !tieneResultado && (
+                            <p className="detail-message-text detail-message-text--subtle">
+                                El partido ha terminado, pero el resultado todavía no se ha cargado desde el panel de administración.
+                            </p>
+                        )}
+                        {tieneCrucePendiente && (
+                            <p className="detail-message-text detail-message-text--subtle">
+                                Este cruce se actualizará automáticamente cuando quede cerrada la clasificación del sábado 16 de mayo de 2026.
+                            </p>
+                        )}
+                    </div>
                 </div>
-            </div>
+            ) : null}
         </>
     );
 }
