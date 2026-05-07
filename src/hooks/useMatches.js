@@ -1,36 +1,95 @@
 import { useEffect, useMemo, useState } from 'react';
 import baseMatches from '../data/MatchData.jsx';
+import teams from '../data/TeamData.jsx';
 import { insforge, isInsforgeConfigured } from '../lib/insforge.js';
 
 const REFRESH_INTERVAL_MS = 10000;
 
-function mergeMatchesWithResults(matches, remoteResults) {
+function getTeamById(id) {
+    return teams.find((team) => team.id === Number(id)) ?? null;
+}
+
+function buildTeam(baseTeam, overrideTeamId, score) {
+    const selectedTeam = overrideTeamId ? getTeamById(overrideTeamId) : null;
+    const team = selectedTeam ?? baseTeam;
+
+    return {
+        ...team,
+        puntuacion: score
+    };
+}
+
+function hasOverrideScore(override) {
+    return Number.isFinite(override?.home_score) && Number.isFinite(override?.away_score);
+}
+
+function mergeMatches(matches, remoteResults, remoteOverrides) {
     const resultsByMatchId = new Map(remoteResults.map((result) => [Number(result.match_id), result]));
+    const overridesByMatchId = new Map(remoteOverrides.map((override) => [Number(override.match_id), override]));
 
     return matches.map((match) => {
         const savedResult = resultsByMatchId.get(match.id);
+        const override = overridesByMatchId.get(match.id);
 
-        if (!savedResult) {
-            return match;
-        }
+        const useOverrideScore = hasOverrideScore(override);
+        const hasClearedResult = override?.result_cleared === true;
+        const resultSource = useOverrideScore
+            ? override
+            : hasClearedResult
+                ? null
+                : savedResult;
+
+        const homeScore = resultSource ? resultSource.home_score : null;
+        const awayScore = resultSource ? resultSource.away_score : null;
 
         return {
             ...match,
-            resultadoConfirmado: true,
-            updatedAt: savedResult.updated_at ?? null,
-            equipos: match.equipos.map((equipo, index) => ({
-                ...equipo,
-                puntuacion: index === 0 ? savedResult.home_score : savedResult.away_score
-            }))
+            fecha: override?.fecha ?? match.fecha,
+            hora: override?.hora ?? match.hora,
+            horaFin: override?.hora_fin ?? match.horaFin,
+            titulo: override?.titulo ?? match.titulo,
+            resultadoConfirmado: useOverrideScore || Boolean(savedResult),
+            updatedAt: override?.updated_at ?? savedResult?.updated_at ?? null,
+            equipos: [
+                buildTeam(match.equipos[0], override?.home_team_id, homeScore),
+                buildTeam(match.equipos[1], override?.away_team_id, awayScore)
+            ]
         };
     });
 }
 
 export function useMatches() {
     const [remoteResults, setRemoteResults] = useState([]);
+    const [remoteOverrides, setRemoteOverrides] = useState([]);
     const [isLoading, setIsLoading] = useState(isInsforgeConfigured);
     const [syncError, setSyncError] = useState('');
     const [isSaving, setIsSaving] = useState(false);
+
+    async function loadRemoteState() {
+        const [{ data: resultData, error: resultError }, { data: overrideData, error: overrideError }] = await Promise.all([
+            insforge.database
+                .from('match_results')
+                .select('*')
+                .order('match_id', { ascending: true }),
+            insforge.database
+                .from('match_admin_overrides')
+                .select('*')
+                .order('match_id', { ascending: true })
+        ]);
+
+        if (resultError || overrideError) {
+            return {
+                ok: false,
+                error: resultError?.message ?? overrideError?.message ?? 'No se han podido cargar los partidos compartidos.'
+            };
+        }
+
+        return {
+            ok: true,
+            results: resultData ?? [],
+            overrides: overrideData ?? []
+        };
+    }
 
     useEffect(() => {
         if (!isInsforgeConfigured) {
@@ -39,27 +98,25 @@ export function useMatches() {
 
         let isDisposed = false;
 
-        async function loadResults() {
-            const { data, error } = await insforge.database
-                .from('match_results')
-                .select('*')
-                .order('match_id', { ascending: true });
+        async function syncMatches() {
+            const remoteState = await loadRemoteState();
 
             if (isDisposed) return;
 
-            if (error) {
+            if (!remoteState.ok) {
                 setSyncError('No se han podido cargar los resultados compartidos.');
                 setIsLoading(false);
                 return;
             }
 
-            setRemoteResults(data ?? []);
+            setRemoteResults(remoteState.results);
+            setRemoteOverrides(remoteState.overrides);
             setSyncError('');
             setIsLoading(false);
         }
 
-        loadResults();
-        const intervalId = window.setInterval(loadResults, REFRESH_INTERVAL_MS);
+        syncMatches();
+        const intervalId = window.setInterval(syncMatches, REFRESH_INTERVAL_MS);
 
         return () => {
             isDisposed = true;
@@ -68,8 +125,8 @@ export function useMatches() {
     }, []);
 
     const matches = useMemo(
-        () => mergeMatchesWithResults(baseMatches, remoteResults),
-        [remoteResults]
+        () => mergeMatches(baseMatches, remoteResults, remoteOverrides),
+        [remoteResults, remoteOverrides]
     );
 
     async function runAdminAction(body) {
@@ -107,17 +164,15 @@ export function useMatches() {
     async function refreshResults() {
         if (!isInsforgeConfigured) return;
 
-        const { data, error } = await insforge.database
-            .from('match_results')
-            .select('*')
-            .order('match_id', { ascending: true });
+        const remoteState = await loadRemoteState();
 
-        if (error) {
-            setSyncError('No se han podido refrescar los resultados compartidos.');
+        if (!remoteState.ok) {
+            setSyncError('No se han podido refrescar los partidos compartidos.');
             return;
         }
 
-        setRemoteResults(data ?? []);
+        setRemoteResults(remoteState.results);
+        setRemoteOverrides(remoteState.overrides);
         setSyncError('');
     }
 
@@ -149,10 +204,24 @@ export function useMatches() {
         return { ok: true };
     }
 
+    async function updateMatch(payload, adminPin) {
+        const result = await runAdminAction({
+            action: 'update-match',
+            pin: adminPin ?? '',
+            ...payload
+        });
+
+        if (!result.ok) return result;
+
+        await refreshResults();
+        return { ok: true };
+    }
+
     return {
         matches,
         saveResult,
         clearResult,
+        updateMatch,
         isSaving,
         isLoading,
         syncError,
