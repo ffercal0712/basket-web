@@ -1,7 +1,6 @@
 import { estadoPartido, partidoToDate } from "../../data/MatchData.jsx";
 import MatchCard from "./MatchCard.jsx";
 import MatchesNext from "./MatchesNext.jsx";
-import AdminResultsPanel from "./AdminResultsPanel.jsx";
 import { useReveal } from "../../hooks/useReveal.js";
 import { useMatches } from "../../hooks/useMatches.js";
 import { useAdminSession } from "../../hooks/useAdminSession.js";
@@ -9,8 +8,8 @@ import { useAdminSession } from "../../hooks/useAdminSession.js";
 function Matches() {
     const {
         matches,
-        saveResult,
         clearResult,
+        updateMatch,
         isSaving,
         isLoading,
         syncError,
@@ -34,8 +33,8 @@ function Matches() {
 
     const resultsGridRef = useReveal('-40px 0px');
 
-    async function handleSaveResult(matchId, homeScore, awayScore) {
-        const result = await saveResult(matchId, homeScore, awayScore, adminPin);
+    async function handleClearResult(matchId) {
+        const result = await clearResult(matchId, adminPin);
 
         if (!result?.ok && result?.error?.toLowerCase().includes('pin')) {
             lockAdmin();
@@ -44,8 +43,8 @@ function Matches() {
         return result;
     }
 
-    async function handleClearResult(matchId) {
-        const result = await clearResult(matchId, adminPin);
+    async function handleUpdateMatch(payload) {
+        const result = await updateMatch(payload, adminPin);
 
         if (!result?.ok && result?.error?.toLowerCase().includes('pin')) {
             lockAdmin();
@@ -64,19 +63,17 @@ function Matches() {
                 </p>
             </div>
 
-            {isAdminUnlocked && isRemoteMode && (
-                <AdminResultsPanel
-                    matches={finalizados}
-                    onSaveResult={handleSaveResult}
-                    onClearResult={handleClearResult}
-                    onLogout={lockAdmin}
-                    isSaving={isSaving}
-                    isLoading={isLoading}
-                    syncError={syncError}
-                />
+            {syncError && (
+                <p className="admin-results-error admin-results-error--page">{syncError}</p>
             )}
 
-            <MatchesNext nextMatches={sinResultado} />
+            <MatchesNext
+                nextMatches={sinResultado}
+                adminMode={isAdminUnlocked && isRemoteMode}
+                onAdminSave={handleUpdateMatch}
+                onAdminClearResult={handleClearResult}
+                isSaving={isSaving || isLoading}
+            />
 
             {finalizados.length > 0 && (
                 <section className="matches-section">
@@ -86,7 +83,14 @@ function Matches() {
                     </h2>
                     <div ref={resultsGridRef} className="cards-grid stagger-grid">
                         {finalizados.map((partido) => (
-                            <MatchCard key={partido.id} partido={partido} />
+                            <MatchCard
+                                key={partido.id}
+                                partido={partido}
+                                adminMode={isAdminUnlocked && isRemoteMode}
+                                onAdminSave={handleUpdateMatch}
+                                onAdminClearResult={handleClearResult}
+                                isSaving={isSaving || isLoading}
+                            />
                         ))}
                     </div>
                 </section>

@@ -1,7 +1,13 @@
 import MatchCard from "./MatchCard.jsx";
 import { useReveal } from "../../hooks/useReveal.js";
 
-function MatchesNext({ nextMatches }) {
+function MatchesNext({
+    nextMatches,
+    adminMode = false,
+    onAdminSave,
+    onAdminClearResult,
+    isSaving = false
+}) {
     const gridRef = useReveal('-40px 0px');
     return (
         <section className="matches-section">
@@ -11,7 +17,14 @@ function MatchesNext({ nextMatches }) {
             </h2>
             <div ref={gridRef} className="cards-grid stagger-grid">
                 {nextMatches.map((partido) => (
-                    <MatchCard key={partido.id} partido={partido} />
+                    <MatchCard
+                        key={partido.id}
+                        partido={partido}
+                        adminMode={adminMode}
+                        onAdminSave={onAdminSave}
+                        onAdminClearResult={onAdminClearResult}
+                        isSaving={isSaving}
+                    />
                 ))}
             </div>
         </section>
