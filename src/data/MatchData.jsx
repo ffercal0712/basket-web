@@ -35,7 +35,6 @@ const partidos = [
         hora: '16:00',
         horaFin: '17:15',
         titulo: 'Jornada del sábado',
-        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
             createScheduledTeam(1),
             createScheduledTeam(2)
@@ -47,7 +46,6 @@ const partidos = [
         hora: '17:15',
         horaFin: '18:30',
         titulo: 'Jornada del sábado',
-        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
             createScheduledTeam(3),
             createScheduledTeam(4)
@@ -59,7 +57,6 @@ const partidos = [
         hora: '18:30',
         horaFin: '19:45',
         titulo: 'Jornada del sábado',
-        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
             createScheduledTeam(5),
             createScheduledTeam(6)
@@ -71,7 +68,6 @@ const partidos = [
         hora: '19:45',
         horaFin: '21:00',
         titulo: 'Jornada del sábado',
-        nota: 'Partido confirmado del cuadro principal.',
         equipos: [
             createScheduledTeam(7),
             createScheduledTeam(8)
@@ -83,7 +79,6 @@ const partidos = [
         hora: '09:15',
         horaFin: '10:20',
         titulo: 'Cruce 7º vs 8º',
-        nota: 'Los equipos se definirán cuando termine la clasificación del sábado.',
         equipos: [
             createPendingTeam(7, '7º clasificado', 'Pendiente de clasificación del sábado.'),
             createPendingTeam(8, '8º clasificado', 'Pendiente de clasificación del sábado.')
@@ -95,7 +90,6 @@ const partidos = [
         hora: '10:20',
         horaFin: '11:30',
         titulo: 'Cruce 5º vs 6º',
-        nota: 'Los equipos se definirán cuando termine la clasificación del sábado.',
         equipos: [
             createPendingTeam(5, '5º clasificado', 'Pendiente de clasificación del sábado.'),
             createPendingTeam(6, '6º clasificado', 'Pendiente de clasificación del sábado.')
@@ -107,7 +101,6 @@ const partidos = [
         hora: '11:30',
         horaFin: '12:45',
         titulo: 'Cruce 3º vs 4º',
-        nota: 'Los equipos se definirán cuando termine la clasificación del sábado.',
         equipos: [
             createPendingTeam(3, '3º clasificado', 'Pendiente de clasificación del sábado.'),
             createPendingTeam(4, '4º clasificado', 'Pendiente de clasificación del sábado.')
@@ -119,7 +112,6 @@ const partidos = [
         hora: '12:45',
         horaFin: '14:00',
         titulo: 'Final del torneo',
-        nota: 'La jugarán el 1º y el 2º clasificado de la jornada del sábado.',
         equipos: [
             createPendingTeam(1, '1º clasificado', 'Pendiente de clasificación del sábado.'),
             createPendingTeam(2, '2º clasificado', 'Pendiente de clasificación del sábado.')

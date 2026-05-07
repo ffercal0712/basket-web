@@ -19,7 +19,7 @@ function MatchDetail() {
         );
     }
 
-    const { fecha, hora, horaFin, equipos, titulo, nota } = foundMatch;
+    const { fecha, hora, horaFin, equipos, titulo } = foundMatch;
     const [equipo1, equipo2] = equipos;
     const estado = estadoPartido(foundMatch);
     const esEnJuego = estado === 'en-juego';
@@ -120,7 +120,7 @@ function MatchDetail() {
                 <div className="detail-message-card">
                     <h2 className="detail-section-title">Información del partido</h2>
                     <p className="detail-message-text">
-                        {nota}
+                        La información pública muestra el cruce, el horario oficial y el resultado cuando esté cargado.
                     </p>
                     {esFinalizados && !tieneResultado && (
                         <p className="detail-message-text detail-message-text--subtle">

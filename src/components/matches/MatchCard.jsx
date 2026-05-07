@@ -20,7 +20,6 @@ function getDraftFromMatch(match) {
         hora: match.hora,
         horaFin: match.horaFin,
         titulo: match.titulo ?? '',
-        nota: match.nota ?? '',
         homeTeamId: match.equipos[0].placeholder ? '' : String(match.equipos[0].id),
         awayTeamId: match.equipos[1].placeholder ? '' : String(match.equipos[1].id),
         homeScore: Number.isFinite(match.equipos[0].puntuacion) ? String(match.equipos[0].puntuacion) : '',
@@ -65,7 +64,6 @@ function MatchCard({
             hora: draft.hora || partido.hora,
             horaFin: draft.horaFin || partido.horaFin,
             titulo: draft.titulo.trim() || partido.titulo,
-            nota: draft.nota.trim() || partido.nota,
             equipos: [
                 buildPreviewTeam(partido.equipos[0], draft.homeTeamId, draft.homeScore),
                 buildPreviewTeam(partido.equipos[1], draft.awayTeamId, draft.awayScore)
@@ -73,7 +71,7 @@ function MatchCard({
         };
     }, [adminMode, draft, isEditing, partido]);
 
-    const { id, fecha, hora, horaFin, equipos, titulo, nota } = previewPartido;
+    const { id, fecha, hora, horaFin, equipos, titulo } = previewPartido;
     const [equipo1, equipo2] = equipos;
     const tieneCrucePendiente = equipo1.placeholder || equipo2.placeholder;
     const tieneResultado = partidoTieneResultado(previewPartido);
@@ -129,7 +127,6 @@ function MatchCard({
             hora: draft.hora,
             horaFin: draft.horaFin,
             titulo: draft.titulo,
-            nota: draft.nota,
             homeTeamId: draft.homeTeamId === '' ? null : Number(draft.homeTeamId),
             awayTeamId: draft.awayTeamId === '' ? null : Number(draft.awayTeamId),
             homeScore: draft.homeScore === '' ? null : Number(draft.homeScore),
@@ -222,10 +219,6 @@ function MatchCard({
                         {equipo2.equipo}
                     </span>
                 </div>
-            )}
-
-            {nota && (
-                <p className="match-card-note">{nota}</p>
             )}
 
             {esFinalizados && ganador === null && (
@@ -328,16 +321,6 @@ function MatchCard({
                                         className="admin-score-input"
                                         value={draft.titulo}
                                         onChange={(event) => updateDraft('titulo', event.target.value)}
-                                    />
-                                </label>
-
-                                <label className="admin-score-field admin-score-field--full">
-                                    <span className="admin-score-label">Nota</span>
-                                    <textarea
-                                        className="admin-score-input admin-score-input--textarea"
-                                        value={draft.nota}
-                                        onChange={(event) => updateDraft('nota', event.target.value)}
-                                        rows="3"
                                     />
                                 </label>
                             </div>

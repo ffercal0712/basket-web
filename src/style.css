@@ -828,15 +828,6 @@ a:hover {
   font-weight: 700;
 }
 
-.admin-score-input--textarea {
-  resize: vertical;
-  min-height: 96px;
-}
-
-.admin-score-field--full {
-  grid-column: 1 / -1;
-}
-
 .admin-score-divider {
   align-self: center;
   padding-bottom: 0.8rem;
@@ -970,17 +961,6 @@ a:hover {
 
 .match-card-team--placeholder {
   color: var(--color-soft);
-}
-
-.match-card-note {
-  margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.45;
-  color: var(--color-text);
-  opacity: 0.82;
-  text-align: center;
-  position: relative;
-  z-index: 1;
 }
 
 .match-card-admin {

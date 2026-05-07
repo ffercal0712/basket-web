@@ -48,7 +48,6 @@ function mergeMatches(matches, remoteResults, remoteOverrides) {
             hora: override?.hora ?? match.hora,
             horaFin: override?.hora_fin ?? match.horaFin,
             titulo: override?.titulo ?? match.titulo,
-            nota: override?.nota ?? match.nota,
             resultadoConfirmado: useOverrideScore || Boolean(savedResult),
             updatedAt: override?.updated_at ?? savedResult?.updated_at ?? null,
             equipos: [

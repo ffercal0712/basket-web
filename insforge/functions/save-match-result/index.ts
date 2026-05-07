@@ -18,7 +18,6 @@ type ActionPayload =
       hora?: string | null;
       horaFin?: string | null;
       titulo?: string | null;
-      nota?: string | null;
       homeTeamId?: number | null;
       awayTeamId?: number | null;
       homeScore?: number | null;
@@ -187,7 +186,6 @@ export default async function(req: Request): Promise<Response> {
       hora: normalizeText(payload.hora) ?? existingOverride?.hora ?? null,
       hora_fin: normalizeText(payload.horaFin) ?? existingOverride?.hora_fin ?? null,
       titulo: normalizeText(payload.titulo) ?? existingOverride?.titulo ?? null,
-      nota: normalizeText(payload.nota) ?? existingOverride?.nota ?? null,
       home_team_id: homeTeamId ?? existingOverride?.home_team_id ?? null,
       away_team_id: awayTeamId ?? existingOverride?.away_team_id ?? null,
       home_score: nextHomeScore ?? existingOverride?.home_score ?? null,
