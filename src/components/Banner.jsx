@@ -32,9 +32,9 @@ function Banner() {
             {/* Capa 3 (frente): título */}
             <div className="banner-content">
                 <h1 className="banner-title">
+                    <span className="banner-title-sub">Veteranos Basket 2026</span>
                     2º Torneo<br />
-                    de Veteranos<br />
-                    <span className="banner-title-glow">Fuengirola</span>
+                    <span className="banner-title-glow">OKSAP</span>
                 </h1>
             </div>
         </section>
