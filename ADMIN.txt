@@ -2,8 +2,8 @@ PANEL DE ADMINISTRACIÓN — GUÍA RÁPIDA
 2º Torneo OKSAP · Veteranos Basket 2026
 ======================================
 
-CÓMO ENTRAR
------------
+CÓMO ENTRAR (Clave PIN: 987654321)
+----------------------------------
 1. Ve a la dirección /admin en el navegador.
 2. Escribe el PIN y pulsa "Entrar como admin".
 3. Una vez dentro, ve a la sección "Partidos" (/partidos).
