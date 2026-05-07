@@ -57,17 +57,17 @@ function MatchCard({ partido }) {
                     </span>
                 )}
 
-                <div className="match-card-meta">
-                    <span className="match-card-date">{formatearFechaCorta(fecha)}</span>
-                    <span className="match-card-separator">·</span>
-                    <span className="match-card-time">{hora} - {horaFin}</span>
-                </div>
-
                 {titulo && (
                     <p className={`match-card-stage ${tieneCrucePendiente ? 'match-card-stage--pending' : ''}`}>
                         {titulo}
                     </p>
                 )}
+
+                <div className="match-card-meta">
+                    <span className="match-card-date">{formatearFechaCorta(fecha)}</span>
+                    <span className="match-card-separator">·</span>
+                    <span className="match-card-time">{hora}</span>
+                </div>
 
                 {esEnJuego ? (
                     <>

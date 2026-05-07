@@ -169,8 +169,10 @@ export function partidoTieneResultado(partido) {
 }
 
 export function formatearFechaCorta(fecha) {
-    const [day, month] = fecha.split('-');
-    return `${day}/${month}`;
+    const [day, month, year] = fecha.split('-');
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    return `${dias[date.getDay()]} ${parseInt(day)}`;
 }
 
 export default partidos;

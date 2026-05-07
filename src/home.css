@@ -31,6 +31,19 @@
     z-index: 0;
 }
 
+.banner-cabecera {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    max-width: 38vw;
+    height: auto;
+    opacity: 0.22;
+    pointer-events: none;
+    z-index: 0;
+    object-fit: contain;
+}
+
 /* Balón decorativo SVG (capa intermedia) — centrado-izquierda */
 .banner-basketball {
     position: absolute;
@@ -56,11 +69,11 @@
 
 /* El título */
 .banner-title {
-    font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
-    font-size: clamp(2rem, 5vw, 4.5rem);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
+    font-family: "Orbitron", "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+    font-size: clamp(1.6rem, 4vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: #fff;
     margin: 0;
@@ -404,7 +417,6 @@
 .parking-block {
     position: relative;
     width: 100%;
-    aspect-ratio: 1726 / 638;
     min-height: 420px;
     display: flex;
     justify-content: flex-end;
@@ -455,8 +467,8 @@
     position: relative;
     z-index: 1;
     width: min(420px, 90%);
-    padding: 2rem 1.5rem;
-    box-sizing: border-box;          /* ← AÑADIR ESTA LÍNEA */
+    padding: 2.5rem 1.5rem;
+    box-sizing: border-box;
     background: rgba(var(--oksap-primary-rgb), 0.92);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -546,6 +558,19 @@
     color: var(--color-accent) !important;
     font-weight: 600;
     margin-top: 0.2rem;
+}
+
+.parking-item-cta {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-soft);
+    margin-top: 0.45rem;
+    transition: color 0.2s ease;
+}
+
+.parking-item-link:hover .parking-item-cta {
+    color: var(--color-accent);
 }
 
 /* ====== Responsive ====== */
@@ -737,11 +762,11 @@
 }
 
 .normativa-section-title {
-    font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 900;
+    font-family: "Orbitron", "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.05em;
     color: var(--oksap-white);
     margin: 0.4rem 0 0.6rem 0;
     text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
@@ -753,6 +778,28 @@
     opacity: 0.75;
     margin: 0;
     line-height: 1.5;
+}
+
+.normativa-pdf-link-wrap {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.normativa-pdf-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-soft);
+    text-decoration: none;
+    border: 1px solid rgba(var(--oksap-soft-rgb), 0.3);
+    border-radius: 8px;
+    padding: 0.55rem 1.2rem;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.normativa-pdf-link:hover {
+    color: var(--color-accent);
+    border-color: rgba(var(--oksap-accent-rgb), 0.4);
 }
 
 .normativa-grid {
@@ -790,9 +837,9 @@
 }
 
 .normativa-card-title {
-    font-family: "Montserrat", system-ui, sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
+    font-family: "Orbitron", "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--color-text-strong);

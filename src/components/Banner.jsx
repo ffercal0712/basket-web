@@ -1,3 +1,5 @@
+import cabecera from "../assets/cabecera.png";
+
 function Banner() {
     return (
         <section className="banner">
@@ -24,6 +26,8 @@ function Banner() {
                 <path d="M 100 3 Q 42 100 100 197" stroke="currentColor" strokeWidth="2.5" fill="none"/>
                 <path d="M 100 3 Q 158 100 100 197" stroke="currentColor" strokeWidth="2.5" fill="none"/>
             </svg>
+
+            <img src={cabecera} alt="" className="banner-cabecera" aria-hidden="true" />
 
             {/* Capa 3 (frente): título */}
             <div className="banner-content">
