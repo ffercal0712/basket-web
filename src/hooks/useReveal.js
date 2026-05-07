@@ -1,21 +1,28 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export function useReveal(rootMargin = '-60px 0px') {
-    const ref = useRef(null);
+    const [node, setNode] = useState(null);
+
+    const ref = useCallback((nextNode) => {
+        setNode(nextNode);
+    }, []);
+
     useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
+        if (!node) return undefined;
+
         const obs = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    el.classList.add('is-revealed');
+                    node.classList.add('is-revealed');
                     obs.disconnect();
                 }
             },
             { rootMargin }
         );
-        obs.observe(el);
+
+        obs.observe(node);
         return () => obs.disconnect();
-    }, [rootMargin]);
+    }, [node, rootMargin]);
+
     return ref;
 }

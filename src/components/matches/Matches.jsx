@@ -1,7 +1,6 @@
 import { estadoPartido, partidoToDate } from "../../data/MatchData.jsx";
 import MatchCard from "./MatchCard.jsx";
 import MatchesNext from "./MatchesNext.jsx";
-import AdminResultsPanel from "./AdminResultsPanel.jsx";
 import { useReveal } from "../../hooks/useReveal.js";
 import { useMatches } from "../../hooks/useMatches.js";
 import { useAdminSession } from "../../hooks/useAdminSession.js";
@@ -9,8 +8,8 @@ import { useAdminSession } from "../../hooks/useAdminSession.js";
 function Matches() {
     const {
         matches,
-        saveResult,
         clearResult,
+        updateMatch,
         isSaving,
         isLoading,
         syncError,
@@ -31,11 +30,14 @@ function Matches() {
         .sort((a, b) =>
             partidoToDate(b.fecha, b.hora) - partidoToDate(a.fecha, a.hora)
         );
+    const allMatches = [...matches];
 
     const resultsGridRef = useReveal('-40px 0px');
+    const adminGridRef = useReveal('-40px 0px');
+    const isAdminMode = isAdminUnlocked && isRemoteMode;
 
-    async function handleSaveResult(matchId, homeScore, awayScore) {
-        const result = await saveResult(matchId, homeScore, awayScore, adminPin);
+    async function handleClearResult(matchId) {
+        const result = await clearResult(matchId, adminPin);
 
         if (!result?.ok && result?.error?.toLowerCase().includes('pin')) {
             lockAdmin();
@@ -44,8 +46,8 @@ function Matches() {
         return result;
     }
 
-    async function handleClearResult(matchId) {
-        const result = await clearResult(matchId, adminPin);
+    async function handleUpdateMatch(payload) {
+        const result = await updateMatch(payload, adminPin);
 
         if (!result?.ok && result?.error?.toLowerCase().includes('pin')) {
             lockAdmin();
@@ -64,32 +66,60 @@ function Matches() {
                 </p>
             </div>
 
-            {isAdminUnlocked && isRemoteMode && (
-                <AdminResultsPanel
-                    matches={finalizados}
-                    onSaveResult={handleSaveResult}
-                    onClearResult={handleClearResult}
-                    onLogout={lockAdmin}
-                    isSaving={isSaving}
-                    isLoading={isLoading}
-                    syncError={syncError}
-                />
+            {syncError && (
+                <p className="admin-results-error admin-results-error--page">{syncError}</p>
             )}
 
-            <MatchesNext nextMatches={sinResultado} />
-
-            {finalizados.length > 0 && (
+            {isAdminMode ? (
                 <section className="matches-section">
                     <h2 className="matches-section-title">
-                        <span className="matches-section-dot matches-section-dot--played"></span>
-                        Partidos finalizados
+                        <span className="matches-section-dot matches-section-dot--upcoming"></span>
+                        Editar partidos
                     </h2>
-                    <div ref={resultsGridRef} className="cards-grid stagger-grid">
-                        {finalizados.map((partido) => (
-                            <MatchCard key={partido.id} partido={partido} />
+                    <div ref={adminGridRef} className="cards-grid stagger-grid">
+                        {allMatches.map((partido) => (
+                            <MatchCard
+                                key={partido.id}
+                                partido={partido}
+                                adminMode={isAdminMode}
+                                onAdminSave={handleUpdateMatch}
+                                onAdminClearResult={handleClearResult}
+                                isSaving={isSaving || isLoading}
+                            />
                         ))}
                     </div>
                 </section>
+            ) : (
+                <>
+                    <MatchesNext
+                        nextMatches={sinResultado}
+                        adminMode={false}
+                        onAdminSave={handleUpdateMatch}
+                        onAdminClearResult={handleClearResult}
+                        isSaving={isSaving || isLoading}
+                    />
+
+                    {finalizados.length > 0 && (
+                        <section className="matches-section">
+                            <h2 className="matches-section-title">
+                                <span className="matches-section-dot matches-section-dot--played"></span>
+                                Partidos finalizados
+                            </h2>
+                            <div ref={resultsGridRef} className="cards-grid stagger-grid">
+                                {finalizados.map((partido) => (
+                                    <MatchCard
+                                        key={partido.id}
+                                        partido={partido}
+                                        adminMode={false}
+                                        onAdminSave={handleUpdateMatch}
+                                        onAdminClearResult={handleClearResult}
+                                        isSaving={isSaving || isLoading}
+                                    />
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                </>
             )}
         </>
     );
