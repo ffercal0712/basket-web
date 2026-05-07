@@ -30,9 +30,7 @@ function Matches() {
         .sort((a, b) =>
             partidoToDate(b.fecha, b.hora) - partidoToDate(a.fecha, a.hora)
         );
-    const allMatches = [...matches].sort((a, b) =>
-        partidoToDate(a.fecha, a.hora) - partidoToDate(b.fecha, b.hora)
-    );
+    const allMatches = [...matches];
 
     const resultsGridRef = useReveal('-40px 0px');
     const adminGridRef = useReveal('-40px 0px');
