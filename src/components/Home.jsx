@@ -27,10 +27,10 @@ function Home() {
         <>
             <Banner />
             <Organizers />
-            <VideoSection />
             <HomeNextMatches nextMatches={sinResultado} lastMatches={ultimosJugados} />
             <LocationSection />
             <NormativaSection />
+            <VideoSection />
         </>
     );
 }

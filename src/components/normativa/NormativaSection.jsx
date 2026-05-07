@@ -1,4 +1,5 @@
 import { useReveal } from "../../hooks/useReveal.js";
+import normativaPdf from "../../assets/ficheros/normativa.pdf";
 
 const reglas = [
     {
@@ -6,9 +7,9 @@ const reglas = [
         icon: "🏆",
         titulo: "Competición",
         puntos: [
-            "Cada equipo disputa 2 partidos: uno por jornada.",
-            "El día 2 se juegan las finales por puestos según resultados del día 1.",
-            "Presentarse en pista al menos 15 minutos antes del partido.",
+            "Cada equipo disputará 2 partidos en total, uno cada día del torneo.",
+            "Tras los resultados de la primera jornada, los equipos jugarán los partidos finales correspondientes.",
+            "Los equipos deberán presentarse en la instalación al menos 15 minutos antes de la hora fijada para su partido.",
         ],
     },
     {
@@ -16,9 +17,10 @@ const reglas = [
         icon: "⏱️",
         titulo: "Tiempo de juego",
         puntos: [
-            "4 períodos de 12 minutos corridos.",
-            "Últimos 2 minutos de cada período: reloj parado.",
-            "Posesión: 24 segundos. Prórroga: 5 min corridos, último minuto a reloj parado.",
+            "Cada partido se jugará en 4 periodos de 12 minutos.",
+            "En cada periodo, los 2 últimos minutos se jugarán a reloj parado.",
+            "Se aplicará además control de posesión de 24 segundos.",
+            "En caso de empate, se disputará una prórroga de 5 minutos a reloj corrido, excepto el último minuto, que se jugará a reloj parado.",
         ],
     },
 ];
@@ -54,6 +56,16 @@ function NormativaSection() {
                 {reglas.map(r => (
                     <ReglaCard key={r.id} regla={r} />
                 ))}
+            </div>
+            <div className="normativa-pdf-link-wrap">
+                <a
+                    href={normativaPdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="normativa-pdf-link"
+                >
+                    Ver reglamento completo en PDF →
+                </a>
             </div>
         </section>
     );

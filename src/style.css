@@ -221,11 +221,6 @@ a:hover {
   filter: brightness(35%);
 }
 
-
-.page-content {
-
-}
-
 /* ====== Grid de tarjetas genérico ====== */
 
 .cards-grid {
@@ -405,7 +400,7 @@ a:hover {
 
 .match-card-team {
   font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
-  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  font-size: clamp(0.85rem, 2.5vw, 1.15rem);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-text-strong);
@@ -610,11 +605,11 @@ a:hover {
 }
 
 .page-header-title {
-  font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
+  font-family: "Orbitron", "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
   color: var(--color-text-strong);
   margin: 0 0 0.75rem 0;
   text-align: center;
@@ -1793,11 +1788,11 @@ a:hover {
 }
 
 .home-next-matches-title {
-  font-family: "Barlow Condensed", "Montserrat", system-ui, sans-serif;
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  font-weight: 900;
+  font-family: "Orbitron", "Barlow Condensed", "Montserrat", system-ui, sans-serif;
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
   color: var(--color-text-strong);
   margin: 0 0 1rem 0;
   text-align: center;

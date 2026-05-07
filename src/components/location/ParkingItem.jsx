@@ -9,13 +9,14 @@
  * @returns {React.JSX.Element}
  */
 function ParkingItem({ icon, name, info, distance, link = null }) {
-    const content = (
+    const inner = (
         <>
             <div className="parking-item-icon">{icon}</div>
             <div className="parking-item-text">
                 <strong>{name}</strong>
                 <span>{info}</span>
                 <span className="parking-distance">{distance}</span>
+                {link && <span className="parking-item-cta">Ver en Maps →</span>}
             </div>
         </>
     );
@@ -23,21 +24,14 @@ function ParkingItem({ icon, name, info, distance, link = null }) {
     return (
         <li className="parking-item">
             {link ? (
-                <a
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="parking-item-link"
-                >
-                    {content}
+                <a href={link} target="_blank" rel="noopener noreferrer" className="parking-item-link">
+                    {inner}
                 </a>
-                ) : (
-                <div className="parking-item-inner">
-            {content}
-        </div>
-    )}
-</li>
-);
+            ) : (
+                <div className="parking-item-inner">{inner}</div>
+            )}
+        </li>
+    );
 }
 
 export default ParkingItem;

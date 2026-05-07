@@ -40,7 +40,7 @@ function ParkingBlock() {
                         name="Parking Municipal Elola"
                         info="C. Mallorca, 14 · Acceso fácil"
                         distance="A 150 m del pabellón"
-                        link="https://maps.app.goo.gl/5K9NzGQmFuengirolaElola"
+                        link="https://maps.app.goo.gl/SQwnC7CtwYQ2FxU47"
                     />
                     <ParkingItem
                         icon="🚙"
