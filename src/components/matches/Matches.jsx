@@ -30,8 +30,13 @@ function Matches() {
         .sort((a, b) =>
             partidoToDate(b.fecha, b.hora) - partidoToDate(a.fecha, a.hora)
         );
+    const allMatches = [...matches].sort((a, b) =>
+        partidoToDate(a.fecha, a.hora) - partidoToDate(b.fecha, b.hora)
+    );
 
     const resultsGridRef = useReveal('-40px 0px');
+    const adminGridRef = useReveal('-40px 0px');
+    const isAdminMode = isAdminUnlocked && isRemoteMode;
 
     async function handleClearResult(matchId) {
         const result = await clearResult(matchId, adminPin);
@@ -67,26 +72,18 @@ function Matches() {
                 <p className="admin-results-error admin-results-error--page">{syncError}</p>
             )}
 
-            <MatchesNext
-                nextMatches={sinResultado}
-                adminMode={isAdminUnlocked && isRemoteMode}
-                onAdminSave={handleUpdateMatch}
-                onAdminClearResult={handleClearResult}
-                isSaving={isSaving || isLoading}
-            />
-
-            {finalizados.length > 0 && (
+            {isAdminMode ? (
                 <section className="matches-section">
                     <h2 className="matches-section-title">
-                        <span className="matches-section-dot matches-section-dot--played"></span>
-                        Partidos finalizados
+                        <span className="matches-section-dot matches-section-dot--upcoming"></span>
+                        Editar partidos
                     </h2>
-                    <div ref={resultsGridRef} className="cards-grid stagger-grid">
-                        {finalizados.map((partido) => (
+                    <div ref={adminGridRef} className="cards-grid stagger-grid">
+                        {allMatches.map((partido) => (
                             <MatchCard
                                 key={partido.id}
                                 partido={partido}
-                                adminMode={isAdminUnlocked && isRemoteMode}
+                                adminMode={isAdminMode}
                                 onAdminSave={handleUpdateMatch}
                                 onAdminClearResult={handleClearResult}
                                 isSaving={isSaving || isLoading}
@@ -94,6 +91,37 @@ function Matches() {
                         ))}
                     </div>
                 </section>
+            ) : (
+                <>
+                    <MatchesNext
+                        nextMatches={sinResultado}
+                        adminMode={false}
+                        onAdminSave={handleUpdateMatch}
+                        onAdminClearResult={handleClearResult}
+                        isSaving={isSaving || isLoading}
+                    />
+
+                    {finalizados.length > 0 && (
+                        <section className="matches-section">
+                            <h2 className="matches-section-title">
+                                <span className="matches-section-dot matches-section-dot--played"></span>
+                                Partidos finalizados
+                            </h2>
+                            <div ref={resultsGridRef} className="cards-grid stagger-grid">
+                                {finalizados.map((partido) => (
+                                    <MatchCard
+                                        key={partido.id}
+                                        partido={partido}
+                                        adminMode={false}
+                                        onAdminSave={handleUpdateMatch}
+                                        onAdminClearResult={handleClearResult}
+                                        isSaving={isSaving || isLoading}
+                                    />
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                </>
             )}
         </>
     );
