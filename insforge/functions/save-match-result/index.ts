@@ -9,7 +9,22 @@ const corsHeaders = {
 type ActionPayload =
   | { action: 'verify'; pin: string }
   | { action: 'save'; pin: string; matchId: number; homeScore: number; awayScore: number }
-  | { action: 'clear'; pin: string; matchId: number };
+  | { action: 'clear'; pin: string; matchId: number }
+  | {
+      action: 'update-match';
+      pin: string;
+      matchId: number;
+      fecha?: string | null;
+      hora?: string | null;
+      horaFin?: string | null;
+      titulo?: string | null;
+      nota?: string | null;
+      homeTeamId?: number | null;
+      awayTeamId?: number | null;
+      homeScore?: number | null;
+      awayScore?: number | null;
+      clearResult?: boolean;
+    };
 
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -23,6 +38,24 @@ function jsonResponse(body: unknown, status = 200) {
 
 function extractPin(req: Request, payload: Partial<ActionPayload>) {
   return req.headers.get('X-Admin-Pin') ?? payload.pin ?? '';
+}
+
+function normalizeText(value: unknown) {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  return trimmed === '' ? null : trimmed;
+}
+
+function normalizeOptionalNumber(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+
+  const normalized = Number(value);
+  return Number.isFinite(normalized) ? normalized : Number.NaN;
 }
 
 export default async function(req: Request): Promise<Response> {
@@ -65,11 +98,12 @@ export default async function(req: Request): Promise<Response> {
     }
 
     const { error } = await client.database
-      .from('match_results')
+      .from('match_admin_overrides')
       .upsert([{
         match_id: matchId,
         home_score: homeScore,
         away_score: awayScore,
+        result_cleared: false,
         updated_at: new Date().toISOString()
       }], {
         onConflict: 'match_id'
@@ -90,12 +124,92 @@ export default async function(req: Request): Promise<Response> {
     }
 
     const { error } = await client.database
-      .from('match_results')
-      .delete()
-      .eq('match_id', matchId);
+      .from('match_admin_overrides')
+      .upsert([{
+        match_id: matchId,
+        home_score: null,
+        away_score: null,
+        result_cleared: true,
+        updated_at: new Date().toISOString()
+      }], {
+        onConflict: 'match_id'
+      });
 
     if (error) {
       return jsonResponse({ error: error.message ?? 'No se ha podido limpiar el resultado.' }, 500);
+    }
+
+    return jsonResponse({ ok: true });
+  }
+
+  if (payload.action === 'update-match') {
+    const matchId = Number(payload.matchId);
+
+    if (!Number.isFinite(matchId)) {
+      return jsonResponse({ error: 'Partido no válido.' }, 400);
+    }
+
+    const homeTeamId = normalizeOptionalNumber(payload.homeTeamId);
+    const awayTeamId = normalizeOptionalNumber(payload.awayTeamId);
+    const homeScore = normalizeOptionalNumber(payload.homeScore);
+    const awayScore = normalizeOptionalNumber(payload.awayScore);
+
+    if (Number.isNaN(homeTeamId) || Number.isNaN(awayTeamId) || Number.isNaN(homeScore) || Number.isNaN(awayScore)) {
+      return jsonResponse({ error: 'Hay datos del partido con un formato no válido.' }, 400);
+    }
+
+    if (
+      homeTeamId !== null &&
+      awayTeamId !== null &&
+      homeTeamId === awayTeamId
+    ) {
+      return jsonResponse({ error: 'Un partido no puede tener el mismo equipo a ambos lados.' }, 400);
+    }
+
+    const { data: existingOverride, error: existingOverrideError } = await client.database
+      .from('match_admin_overrides')
+      .select('*')
+      .eq('match_id', matchId)
+      .maybeSingle();
+
+    if (existingOverrideError) {
+      return jsonResponse({ error: existingOverrideError.message ?? 'No se ha podido leer el partido.' }, 500);
+    }
+
+    const shouldClearResult = payload.clearResult === true;
+    const nextHomeScore = shouldClearResult ? null : homeScore;
+    const nextAwayScore = shouldClearResult ? null : awayScore;
+
+    const row = {
+      ...(existingOverride ?? {}),
+      match_id: matchId,
+      fecha: normalizeText(payload.fecha) ?? existingOverride?.fecha ?? null,
+      hora: normalizeText(payload.hora) ?? existingOverride?.hora ?? null,
+      hora_fin: normalizeText(payload.horaFin) ?? existingOverride?.hora_fin ?? null,
+      titulo: normalizeText(payload.titulo) ?? existingOverride?.titulo ?? null,
+      nota: normalizeText(payload.nota) ?? existingOverride?.nota ?? null,
+      home_team_id: homeTeamId ?? existingOverride?.home_team_id ?? null,
+      away_team_id: awayTeamId ?? existingOverride?.away_team_id ?? null,
+      home_score: nextHomeScore ?? existingOverride?.home_score ?? null,
+      away_score: nextAwayScore ?? existingOverride?.away_score ?? null,
+      result_cleared: shouldClearResult ? true : existingOverride?.result_cleared ?? false,
+      updated_at: new Date().toISOString()
+    };
+
+    if (homeScore !== null && awayScore !== null) {
+      row.home_score = homeScore;
+      row.away_score = awayScore;
+      row.result_cleared = false;
+    }
+
+    const { error } = await client.database
+      .from('match_admin_overrides')
+      .upsert([row], {
+        onConflict: 'match_id'
+      });
+
+    if (error) {
+      return jsonResponse({ error: error.message ?? 'No se ha podido actualizar el partido.' }, 500);
     }
 
     return jsonResponse({ ok: true });
