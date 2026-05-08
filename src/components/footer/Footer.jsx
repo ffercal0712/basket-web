@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
 import { LuGlobe } from "react-icons/lu";
 import { SiInstagram, SiFacebook, SiX } from "react-icons/si";
-import {FaLinkedin} from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import FooterSocialGroup from "./FooterSocialGroup.jsx";
+
+const SOCIAL_GROUPS = [
+    {
+        label: "OKSAP",
+        links: [
+            { href: "https://oksap.es", label: "Web de OKSAP", icon: <LuGlobe /> },
+            { href: "https://www.instagram.com/oksap.spain/", label: "Instagram de OKSAP", icon: <SiInstagram /> },
+            { href: "https://www.linkedin.com/company/oksap-spain", label: "LinkedIn de OKSAP", icon: <FaLinkedin /> },
+        ],
+    },
+    {
+        label: "Ayuntamiento de Fuengirola",
+        links: [
+            { href: "https://www.fuengirola.es", label: "Web del Ayuntamiento de Fuengirola", icon: <LuGlobe /> },
+            { href: "https://www.instagram.com/aytofuengirola/", label: "Instagram del Ayuntamiento de Fuengirola", icon: <SiInstagram /> },
+            { href: "https://www.facebook.com/ayuntamientofuengirola", label: "Facebook del Ayuntamiento de Fuengirola", icon: <SiFacebook /> },
+            { href: "https://twitter.com/fuengirola", label: "Twitter del Ayuntamiento de Fuengirola", icon: <SiX /> },
+        ],
+    },
+    {
+        label: "Torneo",
+        links: [
+            { href: "https://www.instagram.com/2_torneo_veteranos_fuengirola/", label: "Publicación del torneo en Instagram", icon: <SiInstagram /> },
+        ],
+    },
+];
 
 function Footer() {
     return (
@@ -19,48 +46,9 @@ function Footer() {
 
                     <div className="footer-column">
                         <h3 className="footer-column-title">Síguenos</h3>
-
-                        <div className="footer-social-group">
-                            <p className="footer-social-label">OKSAP</p>
-                            <div className="footer-social-icons">
-                                <a href="https://oksap.es" target="_blank" rel="noopener noreferrer" aria-label="Web de OKSAP">
-                                    <LuGlobe />
-                                </a>
-                                <a href="https://www.instagram.com/oksap.spain/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de OKSAP">
-                                    <SiInstagram />
-                                </a>
-                                <a href="https://www.linkedin.com/company/oksap-spain" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de OKSAP">
-                                    <FaLinkedin />
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="footer-social-group">
-                            <p className="footer-social-label">Ayuntamiento de Fuengirola</p>
-                            <div className="footer-social-icons">
-                                <a href="https://www.fuengirola.es" target="_blank" rel="noopener noreferrer" aria-label="Web del Ayuntamiento de Fuengirola">
-                                    <LuGlobe />
-                                </a>
-                                <a href="https://www.instagram.com/aytofuengirola/" target="_blank" rel="noopener noreferrer" aria-label="Instagram del Ayuntamiento de Fuengirola">
-                                    <SiInstagram />
-                                </a>
-                                <a href="https://www.facebook.com/ayuntamientofuengirola" target="_blank" rel="noopener noreferrer" aria-label="Facebook del Ayuntamiento de Fuengirola">
-                                    <SiFacebook />
-                                </a>
-                                <a href="https://twitter.com/fuengirola" target="_blank" rel="noopener noreferrer" aria-label="Twitter del Ayuntamiento de Fuengirola">
-                                    <SiX />
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="footer-social-group">
-                            <p className="footer-social-label">Torneo</p>
-                            <div className="footer-social-icons">
-                                <a href="https://www.instagram.com/2_torneo_veteranos_fuengirola/" target="_blank" rel="noopener noreferrer" aria-label="Publicación del torneo en Instagram">
-                                    <SiInstagram />
-                                </a>
-                            </div>
-                        </div>
+                        {SOCIAL_GROUPS.map((group) => (
+                            <FooterSocialGroup key={group.label} label={group.label} links={group.links} />
+                        ))}
                     </div>
 
                     <div className="footer-column">

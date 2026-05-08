@@ -1,4 +1,4 @@
-import cabecera from "../assets/cabecera.png";
+import cabecera from "../assets/cabecera2.png";
 
 function Banner() {
     return (
@@ -16,15 +16,6 @@ function Banner() {
                 <path d="M 96 238 A 44 44 0 0 1 184 238" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 4" fill="none"/>
                 <circle cx="140" cy="363" r="9" stroke="currentColor" strokeWidth="2"/>
                 <path d="M 119 363 A 21 21 0 0 0 161 363" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-            </svg>
-
-            {/* Capa 2: balón en rosa */}
-            <svg className="banner-basketball" viewBox="0 0 200 200" fill="none" aria-hidden="true">
-                <circle cx="100" cy="100" r="97" stroke="currentColor" strokeWidth="2.5"/>
-                <line x1="100" y1="3" x2="100" y2="197" stroke="currentColor" strokeWidth="2.5"/>
-                <line x1="3" y1="100" x2="197" y2="100" stroke="currentColor" strokeWidth="2.5"/>
-                <path d="M 100 3 Q 42 100 100 197" stroke="currentColor" strokeWidth="2.5" fill="none"/>
-                <path d="M 100 3 Q 158 100 100 197" stroke="currentColor" strokeWidth="2.5" fill="none"/>
             </svg>
 
             <img src={cabecera} alt="" className="banner-cabecera" aria-hidden="true" />

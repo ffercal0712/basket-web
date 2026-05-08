@@ -18,7 +18,8 @@ Este documento explica cómo funciona la página, qué puede hacer un administra
 10. [Cómo asignar los equipos del domingo](#10-cómo-asignar-los-equipos-del-domingo)
 11. [Los cambios se sincronizan solos](#11-los-cambios-se-sincronizan-solos)
 12. [El listado de partidos en la página de inicio](#12-el-listado-de-partidos-en-la-página-de-inicio)
-13. [Preguntas frecuentes](#13-preguntas-frecuentes)
+13. [La sección de clasificación final](#13-la-sección-de-clasificación-final)
+14. [Preguntas frecuentes](#14-preguntas-frecuentes)
 
 ---
 
@@ -28,7 +29,7 @@ La página tiene las siguientes secciones accesibles desde el menú:
 
 | Sección | Dirección | Qué muestra |
 |---|---|---|
-| Inicio | `/` | Próximos partidos o últimos resultados, ubicación, normativa, vídeo |
+| Inicio | `/` | Próximos partidos o últimos resultados, clasificación final (cuando procede), ubicación, normativa, vídeo |
 | Equipos | `/equipos` | Tarjetas con todos los equipos inscritos |
 | Partidos | `/partidos` | Todos los partidos del torneo con su estado actual |
 | Admin | `/admin` | Acceso privado para gestionar los partidos |
@@ -238,7 +239,35 @@ Nombres de los equipos, escudos, fecha y hora, y la etiqueta de estado (Próxima
 
 ---
 
-## 13. Preguntas frecuentes
+## 13. La sección de clasificación final
+
+Cuando **todos los partidos del torneo han terminado**, aparece automáticamente en la página de inicio una nueva sección llamada **"Clasificación final — Mejores equipos"** que muestra los tres equipos con mayor puntuación acumulada a lo largo de todo el torneo.
+
+### Cuándo aparece
+
+Esta sección **solo es visible cuando no queda ningún partido por jugar** (es decir, todos los partidos tienen estado "Finalizado"). No aparece durante el torneo ni antes de que empiece.
+
+Si quedan partidos pendientes, la sección no se muestra aunque haya resultados parciales.
+
+### Cómo se calcula la clasificación
+
+Se suman **todos los puntos marcados** por cada equipo en los partidos que ya tienen resultado introducido. Se ordenan los equipos de mayor a menor puntuación total y se muestran los tres primeros con su posición (1º, 2º, 3º) y el total de puntos anotados.
+
+### Qué ocurre si hay empate en puntos
+
+Los empates en puntuación total no se desempatan automáticamente: la posición en el podio quedará determinada por el orden en que aparecen en los cálculos internos. Si hay que reflejar un desempate oficial, habría que ajustarlo manualmente en el código.
+
+### Dónde aparece en la página
+
+Justo encima de la sección de partidos (últimos resultados), para que sea lo primero que se vea al llegar a la página una vez concluido el torneo.
+
+### Requisito para que funcione correctamente
+
+Para que la clasificación sea correcta, es imprescindible que **todos los partidos finalizados tengan el resultado introducido** en el panel de administración. Un partido finalizado sin resultado no aporta puntos al cálculo, por lo que si falta alguno, el podio puede no ser representativo.
+
+---
+
+## 14. Preguntas frecuentes
 
 **¿Qué pasa si el partido acaba antes de la hora prevista?**
 
@@ -251,6 +280,10 @@ Sí. El administrador puede editar cualquier partido en cualquier momento, indep
 **¿Se puede cambiar la hora o fecha de un partido desde el panel de administración?**
 
 Sí. Desde el formulario de edición de cada tarjeta se puede cambiar la fecha, la hora de inicio y la hora de fin. El estado del partido (Próximamente / En juego / Finalizado) se recalcula automáticamente con los nuevos horarios.
+
+**¿La sección de clasificación final aparece sola o hay que hacer algo para activarla?**
+
+Aparece sola. En cuanto no quede ningún partido por jugar, la sección se muestra automáticamente en la página de inicio. No hay que tocar nada.
 
 **¿Qué pasa si se pierde la conexión a internet durante el torneo?**
 
@@ -267,6 +300,7 @@ Solo quien tenga el PIN correcto. El PIN se verifica en el servidor cada vez que
 No hay ninguna acción técnica necesaria. Lo que sí conviene hacer durante el torneo:
 - Al terminar cada partido del sábado: introducir el resultado.
 - Antes de los partidos del domingo: asignar los equipos reales en los partidos 5 al 8 (ver sección 10).
+- Al terminar todos los partidos: introducir los resultados pendientes para que la clasificación final sea correcta.
 
 ---
 

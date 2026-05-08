@@ -266,6 +266,7 @@ a:hover {
   flex-direction: row;
   align-items: stretch;
   gap: 1.25rem;
+  height: 100%;
   transition:
           transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
           box-shadow 0.3s ease,
@@ -1852,6 +1853,54 @@ a:hover {
   background: rgba(var(--oksap-soft-rgb), 0.15);
   border-color: var(--color-soft);
   color: var(--color-soft);
+}
+
+/* ====== Home: clasificación final (top 3 equipos) ====== */
+
+.home-top-teams {
+  padding: 4rem 8vw 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .home-top-teams {
+    padding: 3rem 6vw 0.5rem;
+  }
+}
+
+.cards-grid--top3 {
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 1.25rem;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .cards-grid--top3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.top-team-rank {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.55rem;
+  border-radius: 6px;
+  margin-bottom: 0.45rem;
+  background: rgba(var(--oksap-accent-rgb), 0.15);
+  color: var(--color-accent);
+}
+
+.top-team-rank--soft {
+  background: rgba(var(--oksap-soft-rgb), 0.15);
+  color: var(--color-soft);
+}
+
+.top-team-rank--white {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--color-text);
 }
 
 .match-card-badge--live {

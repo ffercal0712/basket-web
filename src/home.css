@@ -18,11 +18,11 @@
         radial-gradient(ellipse 55% 70% at 100% 100%, rgba(var(--oksap-soft-rgb), 0.36) 0%, transparent 60%);
 }
 
-/* Cancha decorativa SVG (capa de fondo) — centrada-derecha */
+/* Cancha decorativa SVG — centrada-izquierda (donde estaba el balón) */
 .banner-court {
     position: absolute;
-    bottom: -25px;
-    left: calc(50% + 30px);
+    bottom: -50px;
+    left: calc(50% - 275px);
     width: 285px;
     height: auto;
     color: var(--oksap-soft);
@@ -31,30 +31,20 @@
     z-index: 0;
 }
 
+/* Imagen decorativa — esquina inferior derecha */
 .banner-cabecera {
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 300px;
-    max-width: 38vw;
+    right: 0;
+    left: auto;
+    width: 480px;
+    max-width: 50vw;
     height: auto;
-    opacity: 0.22;
+    opacity: 0.52;
     pointer-events: none;
     z-index: 0;
     object-fit: contain;
-}
-
-/* Balón decorativo SVG (capa intermedia) — centrado-izquierda */
-.banner-basketball {
-    position: absolute;
-    bottom: -50px;
-    left: calc(50% - 275px);
-    width: 285px;
-    height: 285px;
-    color: var(--oksap-accent);
-    opacity: 0.12;
-    pointer-events: none;
-    z-index: 1;
+    object-position: bottom right;
 }
 
 /* Contenedor del título */
@@ -111,17 +101,16 @@
         padding: 0 6vw;
     }
 
-    .banner-basketball {
+    .banner-court {
         width: 190px;
-        height: 190px;
         bottom: -30px;
         left: calc(50% - 185px);
     }
 
-    .banner-court {
-        width: 190px;
-        bottom: -20px;
-        left: calc(50% + 10px);
+    .banner-cabecera {
+        width: 230px;
+        max-width: 44vw;
+        opacity: 0.32;
     }
 }
 
