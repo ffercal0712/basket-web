@@ -19,7 +19,8 @@ Este documento explica cómo funciona la página, qué puede hacer un administra
 11. [Los cambios se sincronizan solos](#11-los-cambios-se-sincronizan-solos)
 12. [El listado de partidos en la página de inicio](#12-el-listado-de-partidos-en-la-página-de-inicio)
 13. [La sección de clasificación final](#13-la-sección-de-clasificación-final)
-14. [Preguntas frecuentes](#14-preguntas-frecuentes)
+14. [El popup de redes sociales](#14-el-popup-de-redes-sociales)
+15. [Preguntas frecuentes](#15-preguntas-frecuentes)
 
 ---
 
@@ -241,7 +242,7 @@ Nombres de los equipos, escudos, fecha y hora, y la etiqueta de estado (Próxima
 
 ## 13. La sección de clasificación final
 
-Cuando **todos los partidos del torneo han terminado**, aparece automáticamente en la página de inicio una nueva sección llamada **"Clasificación final — Mejores equipos"** que muestra los tres equipos con mayor puntuación acumulada a lo largo de todo el torneo.
+Cuando **todos los partidos del torneo han terminado**, aparece automáticamente en la página de inicio una sección llamada **"Clasificación final — Mejores equipos"** con los **8 equipos** ordenados por posición final, mostrando también la puntuación total acumulada de cada uno.
 
 ### Cuándo aparece
 
@@ -249,13 +250,35 @@ Esta sección **solo es visible cuando no queda ningún partido por jugar** (es 
 
 Si quedan partidos pendientes, la sección no se muestra aunque haya resultados parciales.
 
-### Cómo se calcula la clasificación
+### Cómo se determina el orden
 
-Se suman **todos los puntos marcados** por cada equipo en los partidos que ya tienen resultado introducido. Se ordenan los equipos de mayor a menor puntuación total y se muestran los tres primeros con su posición (1º, 2º, 3º) y el total de puntos anotados.
+El orden se basa en el **resultado de los partidos del domingo** (la jornada final), no en la puntuación total acumulada. Cada partido del domingo resuelve dos posiciones:
 
-### Qué ocurre si hay empate en puntos
+| Partido del domingo | Posiciones que resuelve |
+|---|---|
+| Final del torneo (último partido) | 1º y 2º |
+| Cruce 3º vs 4º | 3º y 4º |
+| Cruce 5º vs 6º | 5º y 6º |
+| Cruce 7º vs 8º (primer partido) | 7º y 8º |
 
-Los empates en puntuación total no se desempatan automáticamente: la posición en el podio quedará determinada por el orden en que aparecen en los cálculos internos. Si hay que reflejar un desempate oficial, habría que ajustarlo manualmente en el código.
+En cada partido, el ganador ocupa la posición mejor del par y el perdedor la inferior.
+
+### Dos modos de ordenación
+
+La sección tiene dos botones para cambiar la vista:
+
+- **Ganadores** (modo por defecto): ordenación por resultados de partidos, tal como se describe arriba.
+- **Puntuación**: ordenación de mayor a menor por la suma de puntos anotados en todos los partidos (sábado + domingo).
+
+El visitante puede cambiar entre los dos modos sin que afecte a nada más. El modo activo se muestra resaltado.
+
+### Puntuación mostrada en cada tarjeta
+
+Independientemente del modo de ordenación seleccionado, cada tarjeta siempre muestra la **puntuación total acumulada** del equipo a lo largo de todos los partidos del torneo.
+
+### Qué ocurre si algún partido del domingo no tiene resultado
+
+Si un partido del domingo aún no tiene resultado introducido, las dos posiciones que le corresponden se rellenan provisionalmente con los equipos pendientes ordenados por puntos totales, hasta que se introduzca el resultado.
 
 ### Dónde aparece en la página
 
@@ -263,11 +286,35 @@ Justo encima de la sección de partidos (últimos resultados), para que sea lo p
 
 ### Requisito para que funcione correctamente
 
-Para que la clasificación sea correcta, es imprescindible que **todos los partidos finalizados tengan el resultado introducido** en el panel de administración. Un partido finalizado sin resultado no aporta puntos al cálculo, por lo que si falta alguno, el podio puede no ser representativo.
+Para que la clasificación sea correcta, es imprescindible que **todos los partidos tengan el resultado introducido** en el panel de administración. Un partido sin resultado no aporta puntos al cálculo ni determina posiciones en el podio.
 
 ---
 
-## 14. Preguntas frecuentes
+## 14. El popup de redes sociales
+
+Al entrar a la página por primera vez en una sesión de navegador, aparece automáticamente un **popup** invitando a seguir las redes sociales del torneo. Muestra dos botones: uno para Instagram y otro para Facebook.
+
+### Cuándo aparece
+
+Aparece **una vez por sesión de navegador**, aproximadamente 0,8 segundos después de cargar la página, para dar tiempo a que el contenido se muestre antes de interrumpir. Si el visitante cierra el popup y navega a otras secciones de la web, no vuelve a aparecer hasta que cierre y vuelva a abrir el navegador.
+
+### Cómo cerrarlo
+
+- Pulsando la **✕** en la esquina superior derecha del popup.
+- Haciendo clic en cualquier parte del **fondo oscuro** fuera del popup.
+
+### Redes enlazadas
+
+El popup enlaza únicamente a las redes del torneo (no las de OKSAP ni las del Ayuntamiento):
+
+- **Instagram**: perfil del torneo en Instagram.
+- **Facebook**: evento del torneo en Facebook.
+
+Ambos enlaces se abren en una pestaña nueva.
+
+---
+
+## 15. Preguntas frecuentes
 
 **¿Qué pasa si el partido acaba antes de la hora prevista?**
 
@@ -283,7 +330,7 @@ Sí. Desde el formulario de edición de cada tarjeta se puede cambiar la fecha, 
 
 **¿La sección de clasificación final aparece sola o hay que hacer algo para activarla?**
 
-Aparece sola. En cuanto no quede ningún partido por jugar, la sección se muestra automáticamente en la página de inicio. No hay que tocar nada.
+Aparece sola. En cuanto no quede ningún partido por jugar, la sección se muestra automáticamente en la página de inicio. Muestra los 8 equipos con dos modos de ordenación: por ganadores de partidos (por defecto) o por puntuación total. No hay que tocar nada.
 
 **¿Qué pasa si se pierde la conexión a internet durante el torneo?**
 

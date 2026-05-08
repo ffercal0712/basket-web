@@ -40,7 +40,7 @@
     width: 480px;
     max-width: 50vw;
     height: auto;
-    opacity: 0.52;
+    opacity: 0.82;
     pointer-events: none;
     z-index: 0;
     object-fit: contain;
@@ -110,7 +110,7 @@
     .banner-cabecera {
         width: 230px;
         max-width: 44vw;
-        opacity: 0.32;
+        opacity: 0.6;
     }
 }
 
