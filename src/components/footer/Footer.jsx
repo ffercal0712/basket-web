@@ -25,7 +25,8 @@ const SOCIAL_GROUPS = [
     {
         label: "Torneo",
         links: [
-            { href: "https://www.instagram.com/2_torneo_veteranos_fuengirola/", label: "Publicación del torneo en Instagram", icon: <SiInstagram /> },
+            { href: "https://www.instagram.com/torneooksap_veteranosbasket/", label: "Instagram del torneo", icon: <SiInstagram /> },
+            { href: "https://fb.me/e/4wmS10aWF", label: "Facebook del torneo", icon: <SiFacebook /> },
         ],
     },
 ];

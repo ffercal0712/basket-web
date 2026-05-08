@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./navigation/Header.jsx";
 import Footer from "./footer/Footer.jsx";
+import SocialPopup from "./SocialPopup.jsx";
 import { useEffect } from "react";
 
 function Layout() {
@@ -12,6 +13,7 @@ function Layout() {
 
     return (
         <>
+            <SocialPopup />
             <Header />
             <main className="page-content">
                 <Outlet />
